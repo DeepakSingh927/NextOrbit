@@ -7,6 +7,12 @@ const images = [
   "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop",
   "https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=400&h=400&fit=crop",
   "https://images.unsplash.com/photo-1505236858219-8359eb29e329?w=400&h=400&fit=crop",
+  "https://images.unsplash.com/photo-1519671482677-11fbbbc30979?w=400&h=400&fit=crop",
+  "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=400&h=400&fit=crop",
+  "https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=400&h=400&fit=crop",
+  "https://images.unsplash.com/photo-1519167758481-dc8986ba6c28?w=400&h=400&fit=crop",
+  "https://images.unsplash.com/photo-1536051257676-4ad4ba2131cc?w=400&h=400&fit=crop",
+  "https://images.unsplash.com/photo-1559027615-cd't-crop",
 ];
 
 /* ── Premium silver palette ─────────────────────────────────── */
@@ -25,25 +31,18 @@ const silver = {
 export default function HeroSection() {
   const [current, setCurrent] = useState(0);
   const [prev, setPrev] = useState(0);
-  const [transitioning, setTransitioning] = useState(false);
   const timerRef = useRef(null);
 
   useEffect(() => {
     timerRef.current = setInterval(() => {
-      setTransitioning(true);
-      setTimeout(() => {
-        setPrev(current);
-        setCurrent(c => {
-          const next = (c + 1) % images.length;
-          setPrev(c);
-          return next;
-        });
-        // Small delay before removing transition so new image is visible
-        setTimeout(() => setTransitioning(false), 50);
-      }, 500);
-    }, 3000);
+      setCurrent(c => {
+        const next = (c + 1) % images.length;
+        setPrev(c);
+        return next;
+      });
+    }, 400);
     return () => clearInterval(timerRef.current);
-  }, [current]);
+  }, []);
 
   return (
     <div className="relative min-h-screen bg-black overflow-hidden flex flex-col">
@@ -170,10 +169,16 @@ export default function HeroSection() {
               alt="event"
               className="w-full h-full object-cover absolute inset-0"
               style={{
-                opacity: transitioning ? 0 : 1,
-                transition: "opacity 0.5s ease-in-out",
+                opacity: 1,
+                animation: "fadeIn 0.4s ease-in-out",
               }}
             />
+            <style>{`
+              @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+              }
+            `}</style>
 
             {/* Shine overlay */}
             <div className="absolute inset-0 rounded-full pointer-events-none"
