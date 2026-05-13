@@ -42,7 +42,7 @@ function App() {
       <CustomCursor />
       <main>
         <HeroSection />
-        <About />
+        {/* <About />
         <Services />
         <Portfolio />
         <ExperienceFilm />
@@ -51,7 +51,7 @@ function App() {
         <Process />
         <Gallery />
         <SpecialSections />
-        <Contact />
+        <Contact /> */}
       </main>
       <Footer />
     </>
