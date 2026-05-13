@@ -42,8 +42,8 @@ function App() {
       <CustomCursor />
       <main>
         <HeroSection />
-        {/* <About />
-        <Services />
+        <About />
+        {/*  <Services />
         <Portfolio />
         <ExperienceFilm />
         <Clients />
