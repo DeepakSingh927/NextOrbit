@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import SectionContainer from './SectionContainer';
 
 const testimonials = [
   {
@@ -35,13 +36,13 @@ export default function Testimonials() {
   useEffect(() => { startAutoplay(); return () => clearInterval(intervalRef.current); }, []);
 
   return (
-    <section id="testimonials" className="relative overflow-hidden" style={{ background: '#0B0F19' }}>
+    <section id="testimonials" className="relative overflow-hidden" style={{ background: 'var(--bg-secondary)' }}>
       <div className="absolute pointer-events-none" style={{
         top: '30%', right: 0, width: 500, height: 500, opacity: 0.03,
         background: 'radial-gradient(circle, #8B5CF6 0%, transparent 60%)',
       }} />
 
-      <div style={{ padding: '120px 6%', maxWidth: 1100, margin: '0 auto' }}>
+      <SectionContainer width="narrow">
         <div className="reveal" style={{ textAlign: 'center', marginBottom: 60 }}>
           <div className="section-tag" style={{ margin: '0 auto 20px', width: 'fit-content' }}>
             <span className="dot" /> Testimonials
@@ -102,7 +103,7 @@ export default function Testimonials() {
             ))}
           </div>
         </div>
-      </div>
+      </SectionContainer>
     </section>
   );
 }

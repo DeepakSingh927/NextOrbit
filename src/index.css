@@ -3,15 +3,16 @@
 
 /* ── Design Tokens ─────────────────────────────────── */
 :root {
-  --bg-primary: #050505;
-  --bg-secondary: #0B0F19;
+  --bg-primary: #1F0334;
+  --bg-secondary: #1F0334;
+  --bg-deep: #160228;
   --silver: #C0C0C0;
   --silver-light: #D8D8D8;
   --silver-bright: #E8E8E8;
   --electric-blue: #00B4FF;
   --neon-purple: #8B5CF6;
   --deep-purple: #6D28D9;
-  --space-grey: #1A1A2E;
+  --space-grey: #2a0a4a;
   --gradient-silver: linear-gradient(135deg, #E8E8E8 0%, #A8A8A8 50%, #D0D0D0 100%);
   --gradient-blue: linear-gradient(135deg, #00B4FF 0%, #0066FF 100%);
   --gradient-purple: linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%);
@@ -23,26 +24,37 @@
   --font-body: 'Inter', sans-serif;
 }
 
-/* ── Reset & Base ──────────────────────────────────── */
-*, *::before, *::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* Reset in @layer base so Tailwind utilities (px-*, py-*, etc.) are not overridden */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-html {
-  scroll-behavior: smooth;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(200, 200, 210, 0.2) transparent;
-}
+  html {
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(200, 200, 210, 0.2) transparent;
+  }
 
-body {
-  font-family: var(--font-body);
-  background: var(--bg-primary);
-  color: #ffffff;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  body {
+    font-family: var(--font-body);
+    background: var(--bg-primary);
+    color: #ffffff;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  button {
+    font: inherit;
+    cursor: pointer;
+    border: none;
+    background: none;
+  }
 }
 
 ::-webkit-scrollbar {
@@ -230,13 +242,50 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* ── Section Styles ────────────────────────────────── */
+/* ── Section layout (shared gutters + max-width) ───── */
+.section-container {
+  width: 100%;
+  max-width: 1300px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 6%;
+  padding-right: 6%;
+  box-sizing: border-box;
+}
+.section-container--wide {
+  max-width: 1400px;
+}
+.section-container--narrow {
+  max-width: 1100px;
+}
+.section-padding-y {
+  padding-top: 120px;
+  padding-bottom: 120px;
+}
+.section-padding-y--compact {
+  padding-top: 80px;
+  padding-bottom: 32px;
+}
+/* Legacy alias — horizontal + vertical in one class */
 .section-padding {
-  padding: 120px 5%;
+  padding: 120px 6%;
+  max-width: 1300px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  box-sizing: border-box;
 }
 @media (max-width: 768px) {
+  .section-padding-y {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+  .section-padding-y--compact {
+    padding-top: 56px;
+    padding-bottom: 24px;
+  }
   .section-padding {
-    padding: 80px 5%;
+    padding: 80px 6%;
   }
 }
 .section-tag {

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import SectionContainer from './SectionContainer';
 
 const divisions = [
   {
@@ -94,13 +95,13 @@ function DivisionCard({ div, index }) {
 
 export default function SpecialSections() {
   return (
-    <section id="divisions" className="relative overflow-hidden" style={{ background: '#050505' }}>
+    <section id="divisions" className="relative overflow-hidden" style={{ background: 'var(--bg-primary)' }}>
       <div className="absolute pointer-events-none" style={{
         top: '25%', right: 0, width: 500, height: 500, opacity: 0.02,
         background: 'radial-gradient(circle, #00B4FF 0%, transparent 60%)',
       }} />
 
-      <div style={{ padding: '120px 6%', maxWidth: 1300, margin: '0 auto' }}>
+      <SectionContainer>
         <div className="reveal" style={{ textAlign: 'center', marginBottom: 80 }}>
           <div className="section-tag" style={{ margin: '0 auto 20px', width: 'fit-content' }}>
             <span className="dot" /> Divisions
@@ -116,7 +117,7 @@ export default function SpecialSections() {
           </p>
         </div>
         {divisions.map((div, i) => <DivisionCard key={div.id} div={div} index={i} />)}
-      </div>
+      </SectionContainer>
     </section>
   );
 }

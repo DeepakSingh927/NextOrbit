@@ -1,3 +1,5 @@
+import SectionContainer from './SectionContainer';
+
 const brands = [
   { name: 'Louis Vuitton', category: 'Fashion' },
   { name: 'Apple', category: 'Tech' },
@@ -54,7 +56,7 @@ export default function Clients() {
   const row2 = brands.slice(8, 16);
 
   return (
-    <section id="clients" className="relative overflow-hidden" style={{ background: '#050505', padding: '100px 0' }}>
+    <section id="clients" className="relative overflow-hidden section-padding-y" style={{ background: 'var(--bg-primary)' }}>
       <div style={{
         position: 'absolute', top: 0, left: 0, right: 0, height: 1,
         background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent)',
@@ -64,7 +66,7 @@ export default function Clients() {
         background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent)',
       }} />
 
-      <div style={{ maxWidth: 1300, margin: '0 auto', padding: '0 6%', marginBottom: 56 }}>
+      <SectionContainer padding="none" className="mb-14">
         <div className="reveal" style={{ textAlign: 'center' }}>
           <div className="section-tag" style={{ margin: '0 auto 20px', width: 'fit-content' }}>
             <span className="dot" /> Trusted By
@@ -76,12 +78,12 @@ export default function Clients() {
             Brands that <span className="text-gradient-orbital">orbit</span> with us
           </h2>
         </div>
-      </div>
+      </SectionContainer>
 
       {/* Marquee Row 1 */}
       <div style={{ position: 'relative', overflow: 'hidden', marginBottom: 24 }}>
-        <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 120, zIndex: 10, background: 'linear-gradient(to right, #050505, transparent)' }} />
-        <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: 120, zIndex: 10, background: 'linear-gradient(to left, #050505, transparent)' }} />
+        <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 120, zIndex: 10, background: 'linear-gradient(to right, var(--bg-primary), transparent)' }} />
+        <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: 120, zIndex: 10, background: 'linear-gradient(to left, var(--bg-primary), transparent)' }} />
         <div className="marquee-track">
           {[...row1, ...row1].map((b, i) => <BrandLogo key={`${b.name}-${i}`} brand={b} />)}
         </div>
@@ -89,8 +91,8 @@ export default function Clients() {
 
       {/* Marquee Row 2 */}
       <div style={{ position: 'relative', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 120, zIndex: 10, background: 'linear-gradient(to right, #050505, transparent)' }} />
-        <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: 120, zIndex: 10, background: 'linear-gradient(to left, #050505, transparent)' }} />
+        <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 120, zIndex: 10, background: 'linear-gradient(to right, var(--bg-primary), transparent)' }} />
+        <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: 120, zIndex: 10, background: 'linear-gradient(to left, var(--bg-primary), transparent)' }} />
         <div className="marquee-track-reverse">
           {[...row2, ...row2].map((b, i) => <BrandLogo key={`${b.name}-r-${i}`} brand={b} />)}
         </div>

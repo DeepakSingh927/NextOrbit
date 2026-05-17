@@ -1,6 +1,20 @@
 import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+
+const SELECTOR = '.reveal, .reveal-left, .reveal-right, .reveal-scale';
+
+function revealElementsInView() {
+  document.querySelectorAll(SELECTOR).forEach((el) => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.92 && rect.bottom > 0) {
+      el.classList.add('visible');
+    }
+  });
+}
 
 export default function useScrollReveal() {
+  const { pathname } = useLocation();
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -10,12 +24,17 @@ export default function useScrollReveal() {
           }
         });
       },
-      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+      { threshold: 0.05, rootMargin: '0px 0px -24px 0px' }
     );
 
-    const elements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
-    elements.forEach((el) => observer.observe(el));
+    const mount = setTimeout(() => {
+      document.querySelectorAll(SELECTOR).forEach((el) => observer.observe(el));
+      revealElementsInView();
+    }, 80);
 
-    return () => observer.disconnect();
-  }, []);
+    return () => {
+      clearTimeout(mount);
+      observer.disconnect();
+    };
+  }, [pathname]);
 }

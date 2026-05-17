@@ -1,4 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
+import SectionContainer from './SectionContainer';
+import { contactInfo } from '../content/siteContent';
 
 const eventTypes = ['Luxury Wedding', 'Corporate Event', 'Brand Activation', 'Music Festival', 'Fashion Show', 'VIP Experience', 'Destination Event', 'Other'];
 
@@ -6,6 +8,12 @@ export default function Contact() {
   const [formData, setFormData] = useState({ name: '', brand: '', budget: '', eventType: '', message: '' });
   const [focused, setFocused] = useState('');
   const canvasRef = useRef(null);
+
+  useEffect(() => {
+    document.querySelectorAll('#contact .reveal, #contact .reveal-right').forEach((el) => {
+      el.classList.add('visible');
+    });
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -64,14 +72,14 @@ export default function Contact() {
   });
 
   return (
-    <section id="contact" className="relative overflow-hidden" style={{ background: '#050505' }}>
+    <section id="contact" className="relative overflow-hidden scroll-mt-24" style={{ background: 'var(--bg-primary)' }}>
       <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0.5 }} />
       <div style={{
         position: 'absolute', top: 0, left: 0, right: 0, height: 1,
         background: 'linear-gradient(90deg, transparent, rgba(0,180,255,0.1), transparent)',
       }} />
 
-      <div style={{ padding: '120px 6%', maxWidth: 1300, margin: '0 auto', position: 'relative', zIndex: 10 }}>
+      <SectionContainer style={{ position: 'relative', zIndex: 10 }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 420px), 1fr))', gap: 60, alignItems: 'start' }}>
           {/* Left */}
           <div className="reveal">
@@ -86,7 +94,12 @@ export default function Contact() {
               Ready to create something extraordinary? Tell us about your vision and let's build an experience that transcends the ordinary.
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-              {[['Email', 'hello@nextorbit.com', '✉️'], ['Phone', '+91 98765 43210', '📱'], ['Location', 'Mumbai, India', '📍']].map(([label, value, icon]) => (
+              {[
+                { label: 'Email', value: contactInfo.email, href: contactInfo.emailHref, icon: '✉️' },
+                { label: 'Phone', value: contactInfo.phoneDisplay, href: contactInfo.phoneHref, icon: '📱' },
+                { label: 'Location', value: contactInfo.address, icon: '📍' },
+                { label: 'Hours', value: contactInfo.hours, icon: '🕐' },
+              ].map(({ label, value, href, icon }) => (
                 <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
                   <div style={{
                     width: 44, height: 44, borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -94,7 +107,11 @@ export default function Contact() {
                   }}>{icon}</div>
                   <div>
                     <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 2 }}>{label}</div>
-                    <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.7)' }}>{value}</div>
+                    {href ? (
+                      <a href={href} style={{ fontSize: 14, color: 'rgba(255,255,255,0.7)', textDecoration: 'none' }}>{value}</a>
+                    ) : (
+                      <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.7)' }}>{value}</div>
+                    )}
                   </div>
                 </div>
               ))}
@@ -136,8 +153,8 @@ export default function Contact() {
                     <select name="eventType" value={formData.eventType} onChange={handleChange}
                       onFocus={() => setFocused('eventType')} onBlur={() => setFocused('')}
                       style={{ ...inputStyle('eventType'), appearance: 'none', cursor: 'pointer' }}>
-                      <option value="" style={{ background: '#0B0F19' }}>Select type</option>
-                      {eventTypes.map(t => <option key={t} value={t} style={{ background: '#0B0F19' }}>{t}</option>)}
+                      <option value="" style={{ background: 'var(--bg-primary)' }}>Select type</option>
+                      {eventTypes.map(t => <option key={t} value={t} style={{ background: 'var(--bg-primary)' }}>{t}</option>)}
                     </select>
                   </div>
                 </div>
@@ -161,7 +178,7 @@ export default function Contact() {
             </div>
           </div>
         </div>
-      </div>
+      </SectionContainer>
     </section>
   );
 }

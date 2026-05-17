@@ -32,7 +32,7 @@ export default function PageLoader() {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        background: '#050505',
+        background: 'var(--bg-primary)',
         transition: 'opacity 0.8s ease, transform 0.8s ease',
         opacity: done ? 0 : 1,
         transform: done ? 'scale(1.05)' : 'scale(1)',

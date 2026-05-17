@@ -4,7 +4,7 @@ export default function ExperienceFilm() {
   const [playing, setPlaying] = useState(false);
 
   return (
-    <section id="experience-film" className="relative overflow-hidden" style={{ background: '#0B0F19' }}>
+    <section id="experience-film" className="relative overflow-hidden" style={{ background: 'var(--bg-secondary)' }}>
       <div style={{ position: 'relative', minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         {/* Background Image */}
         <div style={{ position: 'absolute', inset: 0 }}>
@@ -16,7 +16,7 @@ export default function ExperienceFilm() {
           />
           <div style={{
             position: 'absolute', inset: 0,
-            background: 'linear-gradient(to bottom, rgba(11,15,25,0.85) 0%, rgba(5,5,5,0.7) 50%, rgba(11,15,25,0.95) 100%)',
+            background: 'linear-gradient(to bottom, rgba(31,3,52,0.85) 0%, rgba(31,3,52,0.7) 50%, rgba(31,3,52,0.95) 100%)',
           }} />
         </div>
 

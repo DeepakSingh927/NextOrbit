@@ -1,3 +1,5 @@
+import SectionContainer from './SectionContainer';
+
 const steps = [
   { num: '01', title: 'Discovery', desc: 'Deep-dive into your vision, audience, and goals to understand the essence of your event.', icon: '🔍' },
   { num: '02', title: 'Concept Creation', desc: 'We craft a bold creative concept — a narrative that defines every element of the experience.', icon: '💡' },
@@ -9,13 +11,13 @@ const steps = [
 
 export default function Process() {
   return (
-    <section id="process" className="relative overflow-hidden" style={{ background: '#050505' }}>
+    <section id="process" className="relative overflow-hidden" style={{ background: 'var(--bg-primary)' }}>
       <div className="absolute pointer-events-none" style={{
         top: 0, left: '50%', transform: 'translateX(-50%)', width: 600, height: 600, opacity: 0.03,
         background: 'radial-gradient(circle, #00B4FF 0%, transparent 60%)',
       }} />
 
-      <div style={{ padding: '120px 6%', maxWidth: 1100, margin: '0 auto' }}>
+      <SectionContainer width="narrow">
         <div className="reveal" style={{ textAlign: 'center', marginBottom: 80 }}>
           <div className="section-tag" style={{ margin: '0 auto 20px', width: 'fit-content' }}>
             <span className="dot" /> Our Process
@@ -82,7 +84,7 @@ export default function Process() {
             </div>
           ))}
         </div>
-      </div>
+      </SectionContainer>
     </section>
   );
 }

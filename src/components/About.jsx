@@ -1,9 +1,18 @@
 import { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import SectionContainer from "./SectionContainer";
+import OurClients from "./OurClients";
 
 /* ─── Visual fills ─── */
-const KituVisual = () => (
-  <div className="relative w-full h-full flex items-center justify-center overflow-hidden"
-    style={{ background: "linear-gradient(135deg,#f0e8df 0%,#e0cfc3 50%,#cdbba8 100%)" }}>
+const KituVisual = () => {
+  const navigate = useNavigate();
+  
+  return (
+  <div  
+    className="relative w-full h-full flex items-center justify-center overflow-hidden cursor-pointer"
+    style={{ background: "linear-gradient(135deg,#f0e8df 0%,#e0cfc3 50%,#cdbba8 100%)" }}
+    onClick={() => { window.scrollTo(0, 0); navigate('/gallery'); }}
+  >
     <div className="absolute inset-0"
       style={{ background: "radial-gradient(ellipse at 20% 80%,rgba(200,170,145,.5) 0%,transparent 55%)" }} />
     <div className="absolute shadow-2xl"
@@ -28,11 +37,16 @@ const KituVisual = () => (
       Orbit.
     </div>
   </div>
-);
+  );
+};
 
-const TuneVisual = () => (
-  <div className="relative w-full h-full flex items-center justify-center overflow-hidden"
-    style={{ background: "linear-gradient(160deg,#b84c30 0%,#8a3520 50%,#5e2010 100%)" }}>
+const TuneVisual = () => {
+  const navigate = useNavigate();
+  
+  return (
+  <div className="relative w-full h-full flex items-center justify-center overflow-hidden cursor-pointer"
+    style={{ background: "linear-gradient(160deg,#b84c30 0%,#8a3520 50%,#5e2010 100%)" }}
+    onClick={() => { window.scrollTo(0, 0); navigate('/gallery/neon-dreams'); }}>
     <div className="absolute bottom-0 left-1/2 -translate-x-1/2 rounded-full"
       style={{ width: "clamp(120px,18vw,220px)", height: 60, background: "rgba(40,10,5,.7)", filter: "blur(20px)" }} />
     <div className="absolute inset-0"
@@ -51,7 +65,7 @@ const TuneVisual = () => (
           ))
         )}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full flex items-center justify-center"
-          style={{ width: 48, height: 48, background: "radial-gradient(circle at 38% 38%,#222 0%,#0a0a0a 100%)", boxShadow: "0 6px 16px rgba(0,0,0,.7)" }}>
+          style={{ width: 48, height: 48, background: "radial-gradient(circle at 38% 38%,#3d2060 0%,var(--bg-deep) 100%)", boxShadow: "0 6px 16px rgba(31,3,52,.7)" }}>
           <div className="rounded-full border border-red-500"
             style={{ width: 24, height: 24, boxShadow: "0 0 10px rgba(239,68,68,.6)" }} />
         </div>
@@ -63,11 +77,16 @@ const TuneVisual = () => (
     </div>
     <div className="absolute inset-0" style={{ background: "linear-gradient(to top,rgba(30,8,2,.55) 0%,transparent 45%)" }} />
   </div>
-);
+  );
+};
 
-const AdonisVisual = () => (
-  <div className="relative w-full h-full flex items-center justify-center overflow-hidden"
-    style={{ background: "linear-gradient(160deg,#2b4a2e 0%,#1e3520 50%,#152518 100%)" }}>
+const AdonisVisual = () => {
+  const navigate = useNavigate();
+  
+  return (
+  <div className="relative w-full h-full flex items-center justify-center overflow-hidden cursor-pointer"
+    style={{ background: "linear-gradient(160deg,#2b4a2e 0%,#1e3520 50%,#152518 100%)" }}
+    onClick={() => { window.scrollTo(0, 0); navigate('/gallery/eclipse-wedding'); }}>
     <div className="absolute inset-0 opacity-10"
       style={{ background: "repeating-linear-gradient(45deg,rgba(255,255,255,.04) 0px,rgba(255,255,255,.04) 1px,transparent 1px,transparent 14px)" }} />
     {/* White brand card — tilted */}
@@ -117,10 +136,14 @@ const AdonisVisual = () => (
     </div>
     <div className="absolute inset-0" style={{ background: "linear-gradient(to top,rgba(12,26,12,.65) 0%,transparent 50%)" }} />
   </div>
-);
+  );
+};
 
-const FormaVisual = () => (
-  <div className="relative w-full h-full flex items-center justify-center overflow-hidden" style={{ background: "#111" }}>
+const FormaVisual = () => {
+  const navigate = useNavigate();
+  
+  return (
+  <div className="relative w-full h-full flex items-center justify-center overflow-hidden cursor-pointer" style={{ background: "var(--bg-deep)" }} onClick={() => { window.scrollTo(0, 0); navigate('/gallery/nexus-summit'); }}>
     <div className="absolute border border-neutral-800" style={{ top: "8%", left: "6%", width: "42%", height: "54%" }} />
     <div className="absolute border border-neutral-700" style={{ top: "12%", left: "10%", width: "42%", height: "54%", background: "rgba(255,255,255,.02)" }} />
     <div className="absolute border border-neutral-800 rotate-45" style={{ bottom: "10%", right: "8%", width: 56, height: 56 }} />
@@ -139,10 +162,14 @@ const FormaVisual = () => (
     <div className="absolute inset-0"
       style={{ background: "radial-gradient(ellipse at 62% 38%,rgba(255,255,255,.03) 0%,transparent 55%)" }} />
   </div>
-);
+  );
+};
 
-const PulseVisual = () => (
-  <div className="relative w-full h-full flex items-center justify-center overflow-hidden" style={{ background: "#f5f0e8" }}>
+const PulseVisual = () => {
+  const navigate = useNavigate();
+  
+  return (
+  <div className="relative w-full h-full flex items-center justify-center overflow-hidden cursor-pointer" style={{ background: "#f5f0e8" }} onClick={() => { window.scrollTo(0, 0); navigate('/gallery/midnight-vibe'); }}>
     <div className="absolute inset-0 flex items-center justify-center select-none pointer-events-none">
       <p className="font-black text-stone-200"
         style={{ fontFamily: "'Playfair Display',serif", fontSize: "clamp(72px,12vw,160px)", letterSpacing: "-0.05em", lineHeight: 1, transform: "rotate(-6deg)" }}>
@@ -167,15 +194,16 @@ const PulseVisual = () => (
       Experience ↓
     </div>
   </div>
-);
+  );
+};
 
 /* ─── Works ─── */
 const works = [
-  { id: 1, title: "Orbit Gala",           category: "Corporate Event",      tags: ["Corporate", "Gala"],               accent: "#c8a070", visual: <KituVisual /> },
-  { id: 2, title: "Neon Dreams Fest",     category: "Music Festival",       tags: ["Live Music", "Stage"],             accent: "#C1593A", visual: <TuneVisual /> },
-  { id: 3, title: "Eclipse Wedding",      category: "Luxury Wedding",       tags: ["Luxury", "Destination", "Wedding"],accent: "#6a9e50", visual: <AdonisVisual />, featured: true },
-  { id: 4, title: "Nexus Summit",         category: "Brand Activation",     tags: ["Tech", "Activation"],              accent: "#888888", visual: <FormaVisual /> },
-  { id: 5, title: "Midnight Vibe",        category: "VIP Experience",       tags: ["Exclusive", "Nightlife"],          accent: "#FF2D00", visual: <PulseVisual /> },
+  { id: 1, title: "Orbit Gala", category: "Corporate Event", tags: ["Corporate", "Gala"], accent: "#c8a070", visual: <KituVisual /> },
+  { id: 2, title: "Neon Dreams Fest", category: "Music Festival", tags: ["Live Music", "Stage"], accent: "#C1593A", visual: <TuneVisual /> },
+  { id: 3, title: "Eclipse Wedding", category: "Luxury Wedding", tags: ["Luxury", "Destination", "Wedding"], accent: "#6a9e50", visual: <AdonisVisual />, featured: true },
+  { id: 4, title: "Nexus Summit", category: "Brand Activation", tags: ["Tech", "Activation"], accent: "#888888", visual: <FormaVisual /> },
+  { id: 5, title: "Midnight Vibe", category: "VIP Experience", tags: ["Exclusive", "Nightlife"], accent: "#FF2D00", visual: <PulseVisual /> },
 ];
 
 /* ─── Card ─── */
@@ -195,10 +223,10 @@ function WorkCard({ work, featured = false, style = {} }) {
       </div>
       {/* persistent bottom vignette */}
       <div className="absolute inset-0 pointer-events-none"
-        style={{ background: "linear-gradient(to top,rgba(0,0,0,.6) 0%,transparent 38%)" }} />
+        style={{ background: "linear-gradient(to top,rgba(31,3,52,.75) 0%,transparent 38%)" }} />
       {/* hover reveal overlay */}
       <div className="absolute inset-0 pointer-events-none transition-opacity duration-500"
-        style={{ background: "linear-gradient(to top,rgba(0,0,0,.75) 0%,rgba(0,0,0,.08) 45%,transparent 70%)", opacity: hovered ? 1 : 0 }} />
+        style={{ background: "linear-gradient(to top,rgba(31,3,52,.85) 0%,rgba(31,3,52,.12) 45%,transparent 70%)", opacity: hovered ? 1 : 0 }} />
 
       {/* badge */}
       <div className="absolute top-5 left-5 z-10">
@@ -242,6 +270,7 @@ function WorkCard({ work, featured = false, style = {} }) {
 
 /* ─── Main export ─── */
 export default function StudioWorkSection() {
+  const navigate = useNavigate();
   const [visible, setVisible] = useState(false);
   const ref = useRef(null);
 
@@ -276,22 +305,22 @@ export default function StudioWorkSection() {
         }
       `}</style>
 
-      <section ref={ref} className="py-20" style={{ background: "#0A0A0A", fontFamily: "'DM Mono',monospace" }}>
-
+      <section id="experiences" ref={ref} className="scroll-mt-24" style={{ background: "var(--bg-primary)", fontFamily: "'DM Mono',monospace" }}>
+        <SectionContainer>
         {/* Header */}
-        <div className={`mb-14 px-6 md:px-12 lg:px-16 sw-fade d0 ${visible ? "on" : ""}`}>
+        <div id="about" className={`mb-14 scroll-mt-24 sw-fade d0 ${visible ? "on" : ""}`}>
           <div className="flex items-center gap-4 mb-6">
             <div className="w-8 h-px bg-neutral-700" />
             <span className="text-neutral-500 uppercase tracking-[0.4em]" style={{ fontSize: 10 }}>Our Experiences</span>
           </div>
-        
+
         </div>
 
-        {/* Marquee */}
+        {/* Marquee — inset to match grid gutters */}
         <div className={`overflow-hidden border-y border-neutral-800 py-3.5 mb-10 sw-fade d1 ${visible ? "on" : ""}`}>
           <div className="mq-inner">
             {[...Array(2)].flatMap((_, gi) =>
-              ["Luxury Weddings","Corporate Galas","Brand Activations","Music Festivals","Stage Production","VIP Experiences","Destination Events","Live Concerts"].map((s, i) => (
+              ["Luxury Weddings", "Corporate Galas", "Brand Activations", "Music Festivals", "Stage Production", "VIP Experiences", "Destination Events", "Live Concerts"].map((s, i) => (
                 <span key={`${gi}-${i}`} className="text-neutral-700 uppercase tracking-[0.28em] flex items-center gap-2.5" style={{ fontSize: 9 }}>
                   {s} <span className="text-neutral-800">◆</span>
                 </span>
@@ -300,39 +329,36 @@ export default function StudioWorkSection() {
           </div>
         </div>
 
-        {/* ── 2 / 1 / 2 layout ── */}
-        <div className="px-6 md:px-12 lg:px-16">
-
-          {/* TOP — 2 equal */}
-          <div className={`sw-top-row sw-fade d2 ${visible ? "on" : ""}`}>
-            <WorkCard work={works[0]} />
-            <WorkCard work={works[1]} />
-          </div>
-
-          {/* CENTER — 1 big */}
-          <div className={`sw-center sw-fade d3 ${visible ? "on" : ""}`}>
-            <WorkCard work={works[2]} featured />
-          </div>
-
-          {/* BOTTOM — 2 equal */}
-          <div className={`sw-bot-row sw-fade d4 ${visible ? "on" : ""}`}>
-            <WorkCard work={works[3]} />
-            <WorkCard work={works[4]} />
-          </div>
-
+        <div className={`sw-top-row sw-fade d2 ${visible ? "on" : ""}`}>
+          <WorkCard work={works[0]} />
+          <WorkCard work={works[1]} />
         </div>
 
-        {/* Footer CTA */}
-        <div className={`mt-16 mx-6 md:mx-12 lg:mx-16 flex items-center justify-between border-t border-neutral-800 pt-8 sw-fade d5 ${visible ? "on" : ""}`}>
+        <div className={`sw-center sw-fade d3 ${visible ? "on" : ""}`}>
+          <WorkCard work={works[2]} featured />
+        </div>
+
+        <div className={`sw-bot-row sw-fade d4 ${visible ? "on" : ""}`}>
+          <WorkCard work={works[3]} />
+          <WorkCard work={works[4]} />
+        </div>
+
+        <OurClients visible={visible} />
+
+        <div className={`mt-16 flex items-center justify-between border-t border-neutral-800 pt-8 sw-fade d5 ${visible ? "on" : ""}`}>
           <p className="text-neutral-700 uppercase tracking-[0.3em]" style={{ fontSize: 10 }}>© NExt Orbit — 2026</p>
-          <button className="group flex items-center gap-3 px-6 py-3 border border-neutral-800 rounded-full hover:border-neutral-500 transition-all duration-300">
+          <button
+            type="button"
+            onClick={() => navigate("/contact")}
+            className="group flex items-center gap-3 px-6 py-3 border border-neutral-800 rounded-full hover:border-neutral-500 transition-all duration-300"
+          >
             <span className="text-neutral-500 group-hover:text-white uppercase tracking-[0.25em] transition-colors duration-300" style={{ fontSize: 10 }}>
               Start a Project
             </span>
             <span className="text-neutral-700 group-hover:text-white transition-colors text-xs">→</span>
           </button>
         </div>
-
+        </SectionContainer>
       </section>
     </>
   );

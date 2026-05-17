@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import SectionContainer from './SectionContainer';
 
 const services = [
   { title: 'Luxury Weddings', desc: 'Opulent celebrations that transcend the ordinary — from intimate ceremonies to grand spectacles.', icon: '💎', image: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=600&h=400&fit=crop' },
@@ -97,13 +98,13 @@ function ServiceCard({ service }) {
 
 export default function Services() {
   return (
-    <section id="services" className="relative overflow-hidden" style={{ background: '#0B0F19' }}>
+    <section id="services" className="relative overflow-hidden" style={{ background: 'var(--bg-secondary)' }}>
       <div className="absolute top-1/2 left-1/2 pointer-events-none" style={{
         transform: 'translate(-50%, -50%)', width: 800, height: 800, opacity: 0.03,
         background: 'radial-gradient(circle, #8B5CF6 0%, transparent 60%)',
       }} />
 
-      <div style={{ padding: '120px 6% 120px', maxWidth: 1400, margin: '0 auto' }}>
+      <SectionContainer width="wide">
         {/* Header */}
         <div className="reveal" style={{ textAlign: 'center', marginBottom: 60 }}>
           <div className="section-tag" style={{ margin: '0 auto 20px', width: 'fit-content' }}>
@@ -131,7 +132,7 @@ export default function Services() {
             <ServiceCard key={service.title} service={service} />
           ))}
         </div>
-      </div>
+      </SectionContainer>
     </section>
   );
 }
