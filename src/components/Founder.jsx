@@ -40,7 +40,7 @@ export default function Founder() {
           <div className="relative order-2 lg:order-1">
             <div
               className="aspect-[4/5] max-w-md mx-auto lg:mx-0 rounded-2xl overflow-hidden relative"
-              style={{ border: '1px solid rgba(255,255,255,0.08)' }}
+              style={{ border: '1px solid rgba(0,0,0,0.08)' }}
             >
               <img
                 src={founderImg}
@@ -59,14 +59,14 @@ export default function Founder() {
             <div
               className="absolute -bottom-4 -right-2 lg:right-8 rounded-xl px-5 py-4"
               style={{
-                background: 'rgba(255,255,255,0.06)',
-                backdropFilter: 'blur(12px)',
-                border: '1px solid rgba(255,255,255,0.1)',
+                background: '#ffffff',
+                boxShadow: '0 8px 28px rgba(0,0,0,0.08)',
+                border: '1px solid rgba(0,0,0,0.06)',
               }}
             >
-              <p className="text-white/90 text-sm font-medium">{c.name}</p>
-              <p className="text-white/50 text-xs mt-0.5">{c.title}</p>
-              <p className="text-white/40 text-xs mt-1">{c.location}</p>
+              <p className="text-neutral-900 text-sm font-medium">{c.name}</p>
+              <p className="text-neutral-500 text-xs mt-0.5">{c.title}</p>
+              <p className="text-neutral-400 text-xs mt-1">{c.location}</p>
             </div>
           </div>
 
@@ -81,7 +81,7 @@ export default function Founder() {
             {c.paragraphs.map((text) => (
               <p
                 key={text.slice(0, 40)}
-                className="text-white/45 text-sm leading-relaxed mb-5 max-w-lg last:mb-8"
+                className="text-neutral-600 text-sm leading-relaxed mb-5 max-w-lg last:mb-8"
               >
                 {text}
               </p>
@@ -96,7 +96,7 @@ export default function Founder() {
                   >
                     {h.value}
                   </p>
-                  <p className="text-white/35 text-xs uppercase tracking-widest mt-1">
+                  <p className="text-neutral-500 text-xs uppercase tracking-widest mt-1">
                     {h.label}
                   </p>
                 </div>
@@ -107,14 +107,14 @@ export default function Founder() {
               id="company-profile"
               className="rounded-2xl p-6 scroll-mt-24"
               style={{
-                background: 'rgba(255,255,255,0.03)',
-                border: '1px solid rgba(255,255,255,0.06)',
+                background: 'var(--bg-deep)',
+                border: '1px solid rgba(0,0,0,0.06)',
               }}
             >
-              <p className="text-xs uppercase tracking-[0.2em] text-white/40 mb-2">
+              <p className="text-xs uppercase tracking-[0.2em] text-neutral-500 mb-2">
                 Company Profile
               </p>
-              <p className="text-white/55 text-sm leading-relaxed">{c.companyProfile}</p>
+              <p className="text-neutral-600 text-sm leading-relaxed">{c.companyProfile}</p>
             </div>
           </div>
         </div>

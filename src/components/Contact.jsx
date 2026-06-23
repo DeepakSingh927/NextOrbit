@@ -61,22 +61,22 @@ export default function Contact() {
   const handleChange = (e) => setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
 
   const inputBase = {
-    width: '100%', padding: '14px 18px', fontSize: 14, color: '#fff',
-    background: 'rgba(255,255,255,0.03)', borderRadius: 12, outline: 'none',
+    width: '100%', padding: '14px 18px', fontSize: 14, color: '#111',
+    background: '#ffffff', borderRadius: 12, outline: 'none',
     transition: 'all 0.3s', fontFamily: "'Inter', sans-serif", boxSizing: 'border-box',
   };
   const inputStyle = (name) => ({
     ...inputBase,
-    border: `1px solid ${focused === name ? 'rgba(0,180,255,0.3)' : 'rgba(255,255,255,0.06)'}`,
-    boxShadow: focused === name ? '0 0 20px rgba(0,180,255,0.05)' : 'none',
+    border: `1px solid ${focused === name ? 'rgba(0,180,255,0.45)' : 'rgba(0,0,0,0.1)'}`,
+    boxShadow: focused === name ? '0 0 20px rgba(0,180,255,0.08)' : 'none',
   });
 
   return (
     <section id="contact" className="relative overflow-hidden scroll-mt-24" style={{ background: 'var(--bg-primary)' }}>
-      <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0.5 }} />
+      <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0.25 }} />
       <div style={{
         position: 'absolute', top: 0, left: 0, right: 0, height: 1,
-        background: 'linear-gradient(90deg, transparent, rgba(0,180,255,0.1), transparent)',
+        background: 'linear-gradient(90deg, transparent, rgba(0,180,255,0.15), transparent)',
       }} />
 
       <SectionContainer style={{ position: 'relative', zIndex: 10 }}>
@@ -86,11 +86,11 @@ export default function Contact() {
             <div className="section-tag" style={{ marginBottom: 20 }}><span className="dot" /> Get In Touch</div>
             <h2 style={{
               fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(2rem, 4.5vw, 3.2rem)',
-              fontWeight: 700, lineHeight: 1.15, color: '#fff', marginBottom: 24,
+              fontWeight: 700, lineHeight: 1.15, color: '#111', marginBottom: 24,
             }}>
               Launch your next <span className="text-gradient-orbital">orbit</span>
             </h2>
-            <p style={{ fontSize: '1.05rem', lineHeight: 1.7, color: 'rgba(255,255,255,0.4)', maxWidth: 450, marginBottom: 40 }}>
+            <p style={{ fontSize: '1.05rem', lineHeight: 1.7, color: 'rgba(17,17,17,0.55)', maxWidth: 450, marginBottom: 40 }}>
               Ready to create something extraordinary? Tell us about your vision and let's build an experience that transcends the ordinary.
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
@@ -106,11 +106,11 @@ export default function Contact() {
                     fontSize: 18, background: 'rgba(0,180,255,0.06)', border: '1px solid rgba(0,180,255,0.1)', flexShrink: 0,
                   }}>{icon}</div>
                   <div>
-                    <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 2 }}>{label}</div>
+                    <div style={{ fontSize: 11, color: 'rgba(17,17,17,0.45)', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 2 }}>{label}</div>
                     {href ? (
-                      <a href={href} style={{ fontSize: 14, color: 'rgba(255,255,255,0.7)', textDecoration: 'none' }}>{value}</a>
+                      <a href={href} style={{ fontSize: 14, color: 'rgba(17,17,17,0.75)', textDecoration: 'none' }}>{value}</a>
                     ) : (
-                      <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.7)' }}>{value}</div>
+                      <div style={{ fontSize: 14, color: 'rgba(17,17,17,0.75)' }}>{value}</div>
                     )}
                   </div>
                 </div>
@@ -122,19 +122,20 @@ export default function Contact() {
           <div className="reveal-right">
             <div style={{
               borderRadius: 20, padding: '36px 32px',
-              background: 'rgba(255,255,255,0.02)', backdropFilter: 'blur(20px)',
-              border: '1px solid rgba(255,255,255,0.06)',
+              background: '#ffffff',
+              border: '1px solid rgba(0,0,0,0.08)',
+              boxShadow: '0 8px 32px rgba(0,0,0,0.06)',
             }}>
               <form onSubmit={(e) => e.preventDefault()} style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
                   <div>
-                    <label style={{ display: 'block', fontSize: 11, color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 8 }}>Name</label>
+                    <label style={{ display: 'block', fontSize: 11, color: 'rgba(17,17,17,0.45)', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 8 }}>Name</label>
                     <input type="text" name="name" value={formData.name} onChange={handleChange}
                       onFocus={() => setFocused('name')} onBlur={() => setFocused('')}
                       style={inputStyle('name')} placeholder="Your name" />
                   </div>
                   <div>
-                    <label style={{ display: 'block', fontSize: 11, color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 8 }}>Brand</label>
+                    <label style={{ display: 'block', fontSize: 11, color: 'rgba(17,17,17,0.45)', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 8 }}>Brand</label>
                     <input type="text" name="brand" value={formData.brand} onChange={handleChange}
                       onFocus={() => setFocused('brand')} onBlur={() => setFocused('')}
                       style={inputStyle('brand')} placeholder="Your brand" />
@@ -143,24 +144,24 @@ export default function Contact() {
 
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
                   <div>
-                    <label style={{ display: 'block', fontSize: 11, color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 8 }}>Budget</label>
+                    <label style={{ display: 'block', fontSize: 11, color: 'rgba(17,17,17,0.45)', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 8 }}>Budget</label>
                     <input type="text" name="budget" value={formData.budget} onChange={handleChange}
                       onFocus={() => setFocused('budget')} onBlur={() => setFocused('')}
                       style={inputStyle('budget')} placeholder="Estimated budget" />
                   </div>
                   <div>
-                    <label style={{ display: 'block', fontSize: 11, color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 8 }}>Event Type</label>
+                    <label style={{ display: 'block', fontSize: 11, color: 'rgba(17,17,17,0.45)', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 8 }}>Event Type</label>
                     <select name="eventType" value={formData.eventType} onChange={handleChange}
                       onFocus={() => setFocused('eventType')} onBlur={() => setFocused('')}
                       style={{ ...inputStyle('eventType'), appearance: 'none', cursor: 'pointer' }}>
-                      <option value="" style={{ background: 'var(--bg-primary)' }}>Select type</option>
-                      {eventTypes.map(t => <option key={t} value={t} style={{ background: 'var(--bg-primary)' }}>{t}</option>)}
+                      <option value="" style={{ background: '#fff' }}>Select type</option>
+                      {eventTypes.map(t => <option key={t} value={t} style={{ background: '#fff' }}>{t}</option>)}
                     </select>
                   </div>
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', fontSize: 11, color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 8 }}>Message</label>
+                  <label style={{ display: 'block', fontSize: 11, color: 'rgba(17,17,17,0.45)', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 8 }}>Message</label>
                   <textarea name="message" rows={4} value={formData.message} onChange={handleChange}
                     onFocus={() => setFocused('message')} onBlur={() => setFocused('')}
                     style={{ ...inputStyle('message'), resize: 'none' }} placeholder="Tell us about your vision..." />

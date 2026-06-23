@@ -173,25 +173,25 @@ export default function OurClients({ visible = true }) {
 
       <div
         id="our-clients"
-        className={`mt-20 pt-16 border-t border-neutral-800 scroll-mt-24 overflow-visible transition-all duration-700 ${
+        className={`mt-20 pt-16 border-t border-neutral-200 scroll-mt-24 overflow-visible transition-all duration-700 ${
           visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}
       >
         <div className="text-center mb-12 px-2">
-          <div className="inline-flex items-center gap-2 mb-5 px-4 py-1.5 rounded-full border border-neutral-800 bg-white/[0.03]">
+          <div className="inline-flex items-center gap-2 mb-5 px-4 py-1.5 rounded-full border border-neutral-200 bg-neutral-50">
             <span className="w-1.5 h-1.5 rounded-full bg-[#00B4FF] animate-pulse" />
             <span className="text-neutral-500 uppercase tracking-[0.35em]" style={{ fontSize: 9 }}>
               Our Clients
             </span>
           </div>
           <h3
-            className="text-white font-semibold leading-tight"
+            className="text-neutral-900 font-semibold leading-tight"
             style={{
               fontFamily: "'Playfair Display', serif",
               fontSize: 'clamp(1.5rem, 3.5vw, 2.25rem)',
             }}
           >
-            Brands in <span className="italic text-neutral-400">our orbit</span>
+            Brands in <span className="italic text-neutral-500">our orbit</span>
           </h3>
           <p className="text-neutral-600 text-xs mt-3 max-w-md mx-auto tracking-wide">
             Trusted by leading brands across fashion, tech, hospitality, and more
@@ -207,7 +207,7 @@ export default function OurClients({ visible = true }) {
                 className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20"
                 aria-hidden
               >
-                <div className="clients-orbit-ring w-[min(90%,520px)] h-[min(90%,120px)] rounded-[50%] border border-dashed border-neutral-700" />
+                <div className="clients-orbit-ring w-[min(90%,520px)] h-[min(90%,120px)] rounded-[50%] border border-dashed border-neutral-300" />
               </div>
               <MarqueeRow items={orbitRow} duration="28s" />
             </div>

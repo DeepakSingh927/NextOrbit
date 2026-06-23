@@ -107,7 +107,7 @@ export default function PageLoader() {
           fontWeight: 700,
           letterSpacing: '0.15em',
           marginBottom: 32,
-          color: '#fff',
+          color: '#111',
         }}
       >
         NEXT

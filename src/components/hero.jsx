@@ -45,7 +45,7 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <div className="relative min-h-screen overflow-hidden flex flex-col" style={{ background: 'var(--bg-primary)' }}>
+    <div className="relative min-h-screen overflow-hidden flex flex-col" style={{ background: 'var(--bg-hero)' }}>
 
       {/* Background glow blobs */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full opacity-10 pointer-events-none"
@@ -112,7 +112,7 @@ export default function HeroSection() {
 
           {/* Stats */}
           <div className="flex flex-wrap gap-8">
-            {[["500+", "Events Delivered"], ["12+", "Cities Covered"], ["98%", "Client Satisfaction"], ["22 Yrs", "of Excellence"]].map(([n, l]) => (
+            {[["450+", "Events Delivered"], ["12+", "Cities Covered"], ["98%", "Client Satisfaction"], ["26 Yrs", "of Excellence"]].map(([n, l]) => (
               <div key={l}>
                 <div
                   className="text-2xl font-medium"

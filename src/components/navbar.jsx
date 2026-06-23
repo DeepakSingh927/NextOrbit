@@ -57,19 +57,17 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 w-full">
       <nav
-        className="py-3 md:py-4"
+        className="py-3 md:py-4 bg-white"
         style={{
-          borderBottom: '0.5px solid rgba(255,255,255,0.08)',
-          background: 'rgba(31, 3, 52, 0.92)',
-          backdropFilter: 'blur(12px)',
+          borderBottom: '0.5px solid rgba(0, 0, 0, 0.08)',
         }}
       >
         <SectionContainer padding="none" className="flex items-center justify-between gap-3">
-          <Link to="/" onClick={goHome} className="shrink-0 rounded-lg bg-white px-3 py-2">
+          <Link to="/" onClick={goHome} className="shrink-0 rounded-lg bg-white px-3 py-2 border border-black/5">
             <img src={logo} alt="Next Orbit" className="h-8 sm:h-9 w-auto object-contain" />
           </Link>
 
-          <div className="hidden lg:flex items-center gap-1 rounded-full bg-white px-2 py-1.5">
+          <div className="hidden lg:flex items-center gap-1 rounded-full bg-neutral-100 px-2 py-1.5">
             {NAV_LINKS.map((link) => (
               <button
                 key={link.label}
@@ -119,17 +117,14 @@ export default function Navbar() {
         </SectionContainer>
 
         {open && (
-          <div
-            className="lg:hidden border-t border-white/10 mt-3 pt-3 pb-2"
-            style={{ background: 'rgba(31, 3, 52, 0.98)' }}
-          >
+          <div className="lg:hidden border-t border-black/8 mt-3 pt-3 pb-2 bg-white">
             <SectionContainer padding="none" className="flex flex-col gap-1">
               {NAV_LINKS.map((link) => (
                 <button
                   key={link.label}
                   type="button"
                   onClick={() => handleNav(link)}
-                  className="text-white/80 text-sm px-4 py-3 rounded-lg text-left hover:bg-white/10 transition-colors"
+                  className="text-black/70 text-sm px-4 py-3 rounded-lg text-left hover:bg-black/5 transition-colors"
                 >
                   {link.label}
                 </button>

@@ -1,182 +1,126 @@
-import { useState } from "react";
-import SectionContainer from "./SectionContainer";
+import { useState } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import SectionContainer from './SectionContainer';
+import { getExperienceBySlug, getFolderImages, experiences } from '../content/experienceImages';
 
-const photos = [
-  {
-    id: 1,
-    src: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=800&q=80",
-    alt: "Skincare bottles flat lay",
-    tag: "Still life",
-    span: "col-span-5 row-span-2",
-    height: "h-80",
-  },
-  {
-    id: 2,
-    src: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=500&q=80",
-    alt: "Pump bottle on surface",
-    tag: "Product",
-    span: "col-span-3 row-span-1",
-    height: "h-[152px]",
-  },
-  {
-    id: 3,
-    src: "https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=500&q=80",
-    alt: "Minimalist product shot",
-    tag: "Minimal",
-    span: "col-span-4 row-span-2",
-    height: "h-80",
-  },
-  {
-    id: 4,
-    src: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=400&q=80",
-    alt: "Flower and bottle",
-    tag: "Floral",
-    span: "col-span-3 row-span-1",
-    height: "h-[152px]",
-  },
-  {
-    id: 5,
-    src: "https://images.unsplash.com/photo-1570194065650-d99fb4d8a609?w=600&q=80",
-    alt: "Beauty close-up",
-    tag: "Close-up",
-    span: "col-span-3 row-span-1",
-    height: "h-52",
-  },
-  {
-    id: 6,
-    src: "https://images.unsplash.com/photo-1526045612212-70caf35c14df?w=400&q=80",
-    alt: "Soft shadow product",
-    tag: "Shadow",
-    span: "col-span-2 row-span-1",
-    height: "h-52",
-  },
-  {
-    id: 7,
-    src: "https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=400&q=80",
-    alt: "Perfume bottle",
-    tag: "Fragrance",
-    span: "col-span-3 row-span-1",
-    height: "h-52",
-  },
-  {
-    id: 8,
-    src: "https://images.unsplash.com/photo-1614178596938-45de5c86f49a?w=500&q=80",
-    alt: "Abstract light shapes",
-    tag: "Abstract",
-    span: "col-span-4 row-span-1",
-    height: "h-64",
-  },
-  {
-    id: 9,
-    src: "https://images.unsplash.com/photo-1617897903246-719242758050?w=500&q=80",
-    alt: "Skincare arrangement",
-    tag: "Arrangement",
-    span: "col-span-4 row-span-1",
-    height: "h-64",
-  },
-  {
-    id: 10,
-    src: "https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=500&q=80",
-    alt: "Natural light beauty",
-    tag: "Natural",
-    span: "col-span-4 row-span-1",
-    height: "h-64",
-  },
-];
-
-const meta = [
-  { label: "Project Type", value: "Still Life Series" },
-  { label: "Location", value: "Studio, Mumbai" },
-  { label: "Medium", value: "35mm · Digital" },
-];
-
-function PhotoCard({ photo }) {
+function PhotoCard({ src, alt, index }) {
   const [hovered, setHovered] = useState(false);
+  const tall = index % 5 === 0 || index % 5 === 2;
 
   return (
     <div
-      className={`relative overflow-hidden rounded-lg bg-neutral-100 dark:bg-neutral-800 ${photo.span} ${photo.height} cursor-pointer`}
+      className={`relative overflow-hidden rounded-xl bg-neutral-100 cursor-pointer ${
+        tall ? 'col-span-6 sm:col-span-4 row-span-2 min-h-[280px]' : 'col-span-6 sm:col-span-4 min-h-[200px]'
+      }`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
       <img
-        src={photo.src}
-        alt={photo.alt}
-        className={`w-full h-full object-cover transition-transform duration-500 ease-in-out ${
-          hovered ? "scale-105" : "scale-100"
+        src={src}
+        alt={alt}
+        className={`w-full h-full object-cover transition-transform duration-500 ease-out ${
+          hovered ? 'scale-105' : 'scale-100'
+        }`}
+        loading="lazy"
+        decoding="async"
+      />
+      <div
+        className={`absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent transition-opacity duration-300 ${
+          hovered ? 'opacity-100' : 'opacity-0'
         }`}
       />
-
-      {/* Overlay */}
-      <div
-        className={`absolute inset-0 bg-gradient-to-t from-[#1F0334]/60 via-transparent to-transparent transition-opacity duration-300 flex items-end p-3 ${
-          hovered ? "opacity-100" : "opacity-0"
-        }`}
-      >
-        <span className="text-[10px] tracking-widest uppercase font-medium text-white/90">
-          {photo.tag}
-        </span>
-      </div>
     </div>
   );
 }
 
 export default function PhotoGallery() {
+  const { project } = useParams();
+  const experience = getExperienceBySlug(project);
+  const images = getFolderImages(experience.folder);
+
   return (
-    <div className="min-h-screen bg-white dark:bg-[#1F0334] font-sans">
+    <div className="min-h-screen bg-white font-sans pt-8 pb-16">
       <SectionContainer>
-      {/* Google Font */}
-      <style>{`@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');
-        * { font-family: 'DM Sans', sans-serif; }
-        .font-display { font-family: 'Playfair Display', serif; }
-      `}</style>
+        <style>{`
+          @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');
+          .font-display { font-family: 'Playfair Display', serif; }
+        `}</style>
 
-      {/* Header */}
-      <header className="mb-14 max-w-3xl">
-        
+        <Link
+          to="/"
+          state={{ scrollTo: 'experiences' }}
+          className="inline-flex items-center gap-2 text-neutral-500 hover:text-neutral-900 text-sm mb-8 transition-colors"
+        >
+          ← Back to Experiences
+        </Link>
 
-        <h1 className="font-display text-6xl font-normal leading-tight text-neutral-900 dark:text-white mb-6">
-          Botanic <em>Stillness</em>
-        </h1>
-
-        <p className="text-[15px] text-neutral-500 dark:text-neutral-400 leading-relaxed font-light max-w-lg mb-8">
-          A study in quiet beauty — objects pulled from morning light, arranged
-          in brief stillness. Each frame explores the tension between the
-          organic and the manufactured.
-        </p>
-
-        {/* Meta */}
-        <div className="flex gap-12">
-          {meta.map((m) => (
-            <div key={m.label} className="flex flex-col gap-1.5">
-              <span className="text-[10px] tracking-[0.15em] uppercase text-neutral-400 dark:text-neutral-500">
-                {m.label}
+        <header className="mb-12 max-w-3xl">
+          <p
+            className="text-neutral-400 uppercase tracking-[0.25em] mb-3"
+            style={{ fontSize: 10, fontFamily: "'DM Mono',monospace" }}
+          >
+            {experience.category}
+          </p>
+          <h1 className="font-display text-4xl sm:text-5xl font-normal leading-tight text-neutral-900 mb-4">
+            {experience.title}
+          </h1>
+          <p className="text-sm text-neutral-500 tracking-wider uppercase mb-6">
+            {experience.tags.join(' / ')}
+          </p>
+          <div className="flex flex-wrap gap-8">
+            <div>
+              <span className="text-[10px] tracking-[0.15em] uppercase text-neutral-400 block mb-1">
+                Collection
               </span>
-              <span className="text-[14px] text-neutral-700 dark:text-neutral-300 font-medium">
-                {m.value}
-              </span>
+              <span className="text-sm text-neutral-700 font-medium">{experience.folder}</span>
             </div>
-          ))}
-        </div>
-      </header>
+            <div>
+              <span className="text-[10px] tracking-[0.15em] uppercase text-neutral-400 block mb-1">
+                Photos
+              </span>
+              <span className="text-sm text-neutral-700 font-medium">{images.length}</span>
+            </div>
+          </div>
+        </header>
 
-      {/* Divider */}
-      <hr className="border-neutral-200 dark:border-neutral-800 mb-10" />
+        <hr className="border-neutral-200 mb-10" />
 
-      {/* Grid */}
-      <div className="grid grid-cols-12 gap-4 auto-rows-auto">
-        {photos.map((photo) => (
-          <PhotoCard key={photo.id} photo={photo} />
-        ))}
-      </div>
+        {images.length === 0 ? (
+          <p className="text-neutral-500">No photos in this collection yet.</p>
+        ) : (
+          <div className="grid grid-cols-12 gap-3 auto-rows-auto">
+            {images.map((src, i) => (
+              <PhotoCard
+                key={src}
+                src={src}
+                alt={`${experience.title} ${i + 1}`}
+                index={i}
+              />
+            ))}
+          </div>
+        )}
 
-      {/* Footer */}
-      <div className="flex items-center gap-2 mt-10 pb-4">
-        <span className="w-1 h-1 rounded-full bg-neutral-300 dark:bg-neutral-600" />
-        <span className="text-[12px] text-neutral-400 dark:text-neutral-500">
-          10 photographs · all rights reserved
-        </span>
-      </div>
+        {experiences.length > 1 && (
+          <div className="mt-14 pt-8 border-t border-neutral-200">
+            <p className="text-[10px] uppercase tracking-[0.2em] text-neutral-400 mb-4">
+              More Experiences
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {experiences
+                .filter((e) => e.slug !== experience.slug)
+                .map((e) => (
+                  <Link
+                    key={e.slug}
+                    to={`/gallery/${e.slug}`}
+                    onClick={() => window.scrollTo(0, 0)}
+                    className="text-xs px-4 py-2 rounded-full border border-neutral-200 text-neutral-600 hover:border-neutral-400 hover:text-neutral-900 transition-colors"
+                  >
+                    {e.title}
+                  </Link>
+                ))}
+            </div>
+          </div>
+        )}
       </SectionContainer>
     </div>
   );
