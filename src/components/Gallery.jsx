@@ -3,22 +3,19 @@ import { useParams, Link } from 'react-router-dom';
 import SectionContainer from './SectionContainer';
 import { getExperienceBySlug, getFolderImages, experiences } from '../content/experienceImages';
 
-function PhotoCard({ src, alt, index }) {
+function PhotoCard({ src, alt }) {
   const [hovered, setHovered] = useState(false);
-  const tall = index % 5 === 0 || index % 5 === 2;
 
   return (
     <div
-      className={`relative overflow-hidden rounded-xl bg-neutral-100 cursor-pointer ${
-        tall ? 'col-span-6 sm:col-span-4 row-span-2 min-h-[280px]' : 'col-span-6 sm:col-span-4 min-h-[200px]'
-      }`}
+      className="relative overflow-hidden rounded-xl bg-neutral-100 cursor-pointer min-w-0 min-h-[220px] sm:min-h-[260px]"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
       <img
         src={src}
         alt={alt}
-        className={`w-full h-full object-cover transition-transform duration-500 ease-out ${
+        className={`w-full h-full max-w-full min-w-0 object-cover transition-transform duration-500 ease-out ${
           hovered ? 'scale-105' : 'scale-100'
         }`}
         loading="lazy"
@@ -88,13 +85,12 @@ export default function PhotoGallery() {
         {images.length === 0 ? (
           <p className="text-neutral-500">No photos in this collection yet.</p>
         ) : (
-          <div className="grid grid-cols-12 gap-3 auto-rows-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 auto-rows-[minmax(220px,auto)]">
             {images.map((src, i) => (
               <PhotoCard
                 key={src}
                 src={src}
                 alt={`${experience.title} ${i + 1}`}
-                index={i}
               />
             ))}
           </div>

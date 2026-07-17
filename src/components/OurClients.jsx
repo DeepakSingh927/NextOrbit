@@ -42,15 +42,16 @@ function LogoChip({ logo, index }) {
           hovered ? 'is-hovered' : ''
         }`}
         style={{
-          background: '#ffffff',
-          border: `1px solid ${hovered ? 'rgba(139, 92, 246, 0.35)' : 'rgba(0, 0, 0, 0.06)'}`,
+          background: hovered ? '#f7feff' : '#ffffff',
+          border: `1px solid ${hovered ? 'rgba(0, 180, 255, 0.5)' : 'rgba(255, 255, 255, 0.16)'}`,
           boxShadow: hovered
-            ? '0 14px 36px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(139, 92, 246, 0.15)'
-            : '0 4px 16px rgba(0, 0, 0, 0.08)',
-          minWidth: 128,
-          maxWidth: 200,
-          height: 88,
-          padding: '14px 28px',
+            ? '0 14px 36px rgba(0, 180, 255, 0.18), 0 0 0 1px rgba(0, 180, 255, 0.2)'
+            : '0 4px 16px rgba(0, 0, 0, 0.16)',
+          minWidth: 88,
+          maxWidth: 160,
+          height: 64,
+          padding: '10px 16px',
+          transition: 'all 0.5s ease',
         }}
       >
         <div
@@ -79,12 +80,12 @@ function MarqueeRow({ items, reverse = false, duration = '38s' }) {
   return (
     <div className="clients-marquee-row relative py-2">
       <div
-        className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 sm:w-28 z-10"
-        style={{ background: 'linear-gradient(to right, var(--bg-primary), transparent)' }}
+        className="pointer-events-none absolute left-0 top-0 bottom-0 w-12 sm:w-20 z-10"
+        style={{ background: 'linear-gradient(to right, #1F0334, transparent)' }}
       />
       <div
-        className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 sm:w-28 z-10"
-        style={{ background: 'linear-gradient(to left, var(--bg-primary), transparent)' }}
+        className="pointer-events-none absolute right-0 top-0 bottom-0 w-12 sm:w-20 z-10"
+        style={{ background: 'linear-gradient(to left, #1F0334, transparent)' }}
       />
       <div className={trackClass} style={{ animationDuration: duration }}>
         {[...items, ...items].map((logo, i) => (
@@ -125,8 +126,8 @@ export default function OurClients({ visible = true }) {
         }
         .clients-marquee-row {
           overflow-x: clip;
-          padding-top: 0.25rem;
-          padding-bottom: 0.35rem;
+          padding-top: 0.1rem;
+          padding-bottom: 0.15rem;
         }
         .clients-marquee,
         .clients-marquee-reverse {
@@ -135,7 +136,7 @@ export default function OurClients({ visible = true }) {
         }
         .clients-chip {
           animation: clients-float 5s ease-in-out infinite;
-          padding: 4px 0;
+          padding: 2px 0;
         }
         @keyframes clients-float {
           0%, 100% { transform: translateY(0); }
@@ -148,6 +149,7 @@ export default function OurClients({ visible = true }) {
         }
         .client-logo-card.is-hovered {
           transform: scale(1.04);
+          filter: drop-shadow(0 0 12px rgba(0, 180, 255, 0.2));
         }
         .client-logo-img {
           display: block;
@@ -161,6 +163,7 @@ export default function OurClients({ visible = true }) {
         }
         .client-logo-card.is-hovered .client-logo-img {
           max-height: 52px;
+          filter: drop-shadow(0 0 6px rgba(0, 180, 255, 0.25));
         }
         .clients-orbit-ring {
           animation: clients-orbit-spin 24s linear infinite;
@@ -173,27 +176,28 @@ export default function OurClients({ visible = true }) {
 
       <div
         id="our-clients"
-        className={`mt-20 pt-16 border-t border-neutral-200 scroll-mt-24 overflow-visible transition-all duration-700 ${
+        className={`mt-0 py-4 scroll-mt-24 overflow-visible transition-all duration-700 ${
           visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}
+        style={{ background: '#1F0334' }}
       >
-        <div className="text-center mb-12 px-2">
-          <div className="inline-flex items-center gap-2 mb-5 px-4 py-1.5 rounded-full border border-neutral-200 bg-neutral-50">
+        <div className="text-center mb-4 px-2">
+          <div className="inline-flex items-center gap-2 mb-2 px-3 py-1 rounded-full border border-white/15 bg-white/10">
             <span className="w-1.5 h-1.5 rounded-full bg-[#00B4FF] animate-pulse" />
-            <span className="text-neutral-500 uppercase tracking-[0.35em]" style={{ fontSize: 9 }}>
+            <span className="text-white/80 uppercase tracking-[0.35em]" style={{ fontSize: 9 }}>
               Our Clients
             </span>
           </div>
           <h3
-            className="text-neutral-900 font-semibold leading-tight"
+            className="text-white font-semibold leading-tight"
             style={{
               fontFamily: "'Playfair Display', serif",
-              fontSize: 'clamp(1.5rem, 3.5vw, 2.25rem)',
+              fontSize: 'clamp(1.2rem, 2.5vw, 1.6rem)',
             }}
           >
-            Brands in <span className="italic text-neutral-500">our orbit</span>
+            Brands in <span className="italic text-white/70">our orbit</span>
           </h3>
-          <p className="text-neutral-600 text-xs mt-3 max-w-md mx-auto tracking-wide">
+          <p className="text-white/70 text-[11px] mt-2 max-w-md mx-auto tracking-wide">
             Trusted by leading brands across fashion, tech, hospitality, and more
           </p>
         </div>
@@ -213,7 +217,6 @@ export default function OurClients({ visible = true }) {
             </div>
 
             <MarqueeRow items={rowA} duration="36s" />
-            <div className="h-0.5" />
             <MarqueeRow items={rowB} reverse duration="42s" />
           </>
         )}

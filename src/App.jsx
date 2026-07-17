@@ -8,6 +8,7 @@ import Navbar from './components/navbar';
 import HomePage from './pages/HomePage';
 import FounderPage from './pages/FounderPage';
 import ContactPage from './pages/ContactPage';
+import TeamPage from './pages/TeamPage';
 import Gallery from './components/Gallery';
 import Footer from './components/Footer';
 
@@ -24,6 +25,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/founder" element={<FounderPage />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/team" element={<TeamPage />} />
         <Route
           path="/gallery/:project?"
           element={

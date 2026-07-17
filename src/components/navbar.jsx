@@ -9,9 +9,9 @@ const silver = {
 };
 
 const NAV_LINKS = [
-  { label: 'Experiences', sectionId: 'experiences' },
-  { label: 'About', sectionId: 'about' },
-  { label: 'Founder', route: '/founder' },
+  { label: 'Home', route: '/' },
+  { label: 'Gallery', route: '/gallery' },
+  { label: 'Team', route: '/team' },
   { label: 'Contact', route: '/contact' },
   { label: 'Company Profile', route: '/founder', scrollTo: 'company-profile' },
 ];
@@ -52,63 +52,61 @@ export default function Navbar() {
   };
 
   const linkClass =
-    'text-black/70 text-sm px-3 py-2 rounded-full transition-colors duration-200 hover:text-black hover:bg-black/5 whitespace-nowrap block w-full text-left lg:w-auto lg:text-center';
+    'text-white/90 text-sm px-3 py-2 rounded-full transition-colors duration-200 hover:text-[#00B4FF] hover:bg-white/10 whitespace-nowrap block w-full text-left lg:w-auto lg:text-center';
 
   return (
-    <header className="sticky top-0 z-50 w-full">
+    <header className="sticky top-0 z-50 w-full pointer-events-none">
       <nav
-        className="py-3 md:py-4 bg-white"
+        className="pointer-events-auto w-full"
         style={{
-          borderBottom: '0.5px solid rgba(0, 0, 0, 0.08)',
+          padding: '6px 0',
+          background: 'linear-gradient(90deg, rgba(31,3,52,0.9), rgba(31,3,52,0.6))',
+          backdropFilter: 'blur(10px)',
+          WebkitBackdropFilter: 'blur(10px)',
+          borderBottom: '1px solid rgba(255,255,255,0.08)',
         }}
       >
         <SectionContainer padding="none" className="flex items-center justify-between gap-3">
-          <Link to="/" onClick={goHome} className="shrink-0 rounded-lg bg-white px-3 py-2 border border-black/5">
-            <img src={logo} alt="Next Orbit" className="h-8 sm:h-9 w-auto object-contain" />
-          </Link>
+          <Link to="/" onClick={goHome} className="shrink-0 rounded-lg px-2 py-1 flex items-center gap-2">
+            <img src={logo} alt="Next Orbit" className="h-8 sm:h-9 w-auto object-contain" style={{ filter: 'invert(1) brightness(2)' }} />
+           </Link>
 
-          <div className="hidden lg:flex items-center gap-1 rounded-full bg-neutral-100 px-2 py-1.5">
-            {NAV_LINKS.map((link) => (
-              <button
-                key={link.label}
-                type="button"
-                onClick={() => handleNav(link)}
-                className={linkClass}
-              >
-                {link.label}
-              </button>
-            ))}
-          </div>
+          {/* left spacer kept for layout */}
+          <div className="flex-1" />
 
           <div className="flex items-center gap-2 shrink-0">
-            <button
-              type="button"
-              onClick={goContact}
-              className="hidden sm:inline-flex text-black text-sm font-medium px-4 py-2 md:px-5 rounded-full hover:opacity-80 transition-opacity"
-              style={{ background: silver.gradient }}
-            >
-              Let&apos;s Talk
-            </button>
+            <div className="hidden lg:flex items-center gap-1 px-2 py-1.5">
+              {NAV_LINKS.map((link) => (
+                <button
+                  key={link.label}
+                  type="button"
+                  onClick={() => handleNav(link)}
+                  className={linkClass}
+                >
+                  {link.label}
+                </button>
+              ))}
+            </div>
 
             <button
               type="button"
               aria-label={open ? 'Close menu' : 'Open menu'}
               aria-expanded={open}
               onClick={() => setOpen((v) => !v)}
-              className="lg:hidden flex flex-col justify-center items-center w-10 h-10 rounded-lg bg-white gap-1.5"
+              className="lg:hidden flex flex-col justify-center items-center w-10 h-10 rounded-lg bg-white/6 gap-1.5 border border-white/6"
             >
               <span
-                className={`block h-0.5 w-5 bg-black transition-transform duration-200 ${
+                className={`block h-0.5 w-5 bg-white transition-transform duration-200 ${
                   open ? 'translate-y-2 rotate-45' : ''
                 }`}
               />
               <span
-                className={`block h-0.5 w-5 bg-black transition-opacity duration-200 ${
+                className={`block h-0.5 w-5 bg-white transition-opacity duration-200 ${
                   open ? 'opacity-0' : ''
                 }`}
               />
               <span
-                className={`block h-0.5 w-5 bg-black transition-transform duration-200 ${
+                className={`block h-0.5 w-5 bg-white transition-transform duration-200 ${
                   open ? '-translate-y-2 -rotate-45' : ''
                 }`}
               />
@@ -117,26 +115,18 @@ export default function Navbar() {
         </SectionContainer>
 
         {open && (
-          <div className="lg:hidden border-t border-black/8 mt-3 pt-3 pb-2 bg-white">
-            <SectionContainer padding="none" className="flex flex-col gap-1">
+          <div className="lg:hidden mt-2 pt-2 pb-2 w-full" style={{ background: 'linear-gradient(180deg, rgba(31,3,52,0.9), rgba(31,3,52,0.86))' }}>
+            <SectionContainer padding="none" className="flex flex-col gap-2">
               {NAV_LINKS.map((link) => (
                 <button
                   key={link.label}
                   type="button"
                   onClick={() => handleNav(link)}
-                  className="text-black/70 text-sm px-4 py-3 rounded-lg text-left hover:bg-black/5 transition-colors"
+                  className="text-white/90 text-sm px-4 py-3 rounded-lg text-left hover:bg-white/6 transition-colors"
                 >
                   {link.label}
                 </button>
               ))}
-              <button
-                type="button"
-                onClick={goContact}
-                className="mt-2 text-black text-sm font-medium px-4 py-3 rounded-full text-center"
-                style={{ background: silver.gradient }}
-              >
-                Let&apos;s Talk
-              </button>
             </SectionContainer>
           </div>
         )}

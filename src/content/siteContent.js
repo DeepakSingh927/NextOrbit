@@ -25,12 +25,17 @@ export const founderContent = {
 };
 
 export const contactInfo = {
-  email: 'hello@nextorbit.com',
+  email: 'nextorbit.rahul@gmail.com',
   phone: '+91 8898010475',
   phoneDisplay: '+91 8898010475',
-  location: 'Andheri West, Mumbai, Maharashtra',
-  address: 'Next Orbit Experiences, Andheri West, Mumbai — 400053, India',
+  addressLines: [
+    '217, NATIONAL STORAGE BUILDING,',
+    '424/B, S.B. MARG, MAHIM – WEST MUMBAI - 400016.',
+    'LANDMARK - JOHNSON & JOHNSON',
+  ],
   hours: 'Mon – Sat, 10:00 AM – 7:00 PM IST',
-  emailHref: 'mailto:hello@nextorbit.com',
+  emailHref: 'mailto:nextorbit.rahul@gmail.com',
   phoneHref: 'tel:+918898010475',
+  mapLink: 'https://maps.google.com/?q=19.036470,72.847321',
+  mapEmbedUrl: 'https://www.google.com/maps?q=19.036470,72.847321&z=15&output=embed',
 };

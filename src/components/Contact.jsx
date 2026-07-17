@@ -97,7 +97,7 @@ export default function Contact() {
               {[
                 { label: 'Email', value: contactInfo.email, href: contactInfo.emailHref, icon: '✉️' },
                 { label: 'Phone', value: contactInfo.phoneDisplay, href: contactInfo.phoneHref, icon: '📱' },
-                { label: 'Location', value: contactInfo.address, icon: '📍' },
+                { label: 'Location', value: contactInfo.addressLines, href: contactInfo.mapLink, icon: '📍' },
                 { label: 'Hours', value: contactInfo.hours, icon: '🕐' },
               ].map(({ label, value, href, icon }) => (
                 <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
@@ -107,8 +107,14 @@ export default function Contact() {
                   }}>{icon}</div>
                   <div>
                     <div style={{ fontSize: 11, color: 'rgba(17,17,17,0.45)', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 2 }}>{label}</div>
-                    {href ? (
-                      <a href={href} style={{ fontSize: 14, color: 'rgba(17,17,17,0.75)', textDecoration: 'none' }}>{value}</a>
+                    {Array.isArray(value) ? (
+                      <div style={{ fontSize: 14, color: 'rgba(17,17,17,0.75)', lineHeight: 1.6 }}>
+                        {value.map((line, i) => (
+                          <div key={i}>{line}</div>
+                        ))}
+                      </div>
+                    ) : href ? (
+                      <a href={href} target="_blank" rel="noreferrer" style={{ fontSize: 14, color: 'rgba(17,17,17,0.75)', textDecoration: 'none' }}>{value}</a>
                     ) : (
                       <div style={{ fontSize: 14, color: 'rgba(17,17,17,0.75)' }}>{value}</div>
                     )}
@@ -126,6 +132,25 @@ export default function Contact() {
               border: '1px solid rgba(0,0,0,0.08)',
               boxShadow: '0 8px 32px rgba(0,0,0,0.06)',
             }}>
+              <div style={{ marginBottom: 28 }}>
+                <div style={{ fontSize: 12, color: 'rgba(17,17,17,0.5)', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 10 }}>Office Location</div>
+                <div style={{ borderRadius: 18, overflow: 'hidden', border: '1px solid rgba(0,0,0,0.08)' }}>
+                  <iframe
+                    title="Next Orbit Location"
+                    src={contactInfo.mapEmbedUrl}
+                    loading="lazy"
+                    style={{ width: '100%', height: 220, border: 0, display: 'block' }}
+                  />
+                  <div style={{ padding: 16, background: '#f9fafb', color: '#111', lineHeight: 1.6, fontSize: 14 }}>
+                    {contactInfo.addressLines.map((line, i) => (
+                      <div key={i}>{line}</div>
+                    ))}
+                    <a href={contactInfo.mapLink} target="_blank" rel="noreferrer" style={{ display: 'inline-block', marginTop: 10, color: '#0066ff', textDecoration: 'underline' }}>
+                      Open in Google Maps
+                    </a>
+                  </div>
+                </div>
+              </div>
               <form onSubmit={(e) => e.preventDefault()} style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
                   <div>

@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import HeroSection from '../components/hero';
 import About from '../components/About';
 import Footer from '../components/Footer';
+import OurClients from '../components/OurClients';
 import { scrollToSectionAfterNav } from '../utils/scroll';
 
 export default function HomePage() {
@@ -21,6 +22,7 @@ export default function HomePage() {
   return (
     <main>
       <HeroSection />
+      <OurClients visible />
       <About />
       <Footer />
     </main>

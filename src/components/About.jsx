@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SectionContainer from './SectionContainer';
-import OurClients from './OurClients';
+ 
 import { experiencesWithImages } from '../content/experienceImages';
 
 function WorkCard({ work, featured = false, style = {} }) {
@@ -167,9 +167,12 @@ export default function StudioWorkSection() {
         .sw-bot-row   { display:grid; grid-template-columns:1fr 1fr; gap:16px; height:clamp(260px,34vw,460px); margin-top:16px; }
 
         @media(max-width:640px){
+          .mq-inner{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0.75rem;animation:none;white-space:normal;}
+          .mq-inner span{white-space:normal;}
           .sw-top-row,.sw-bot-row{grid-template-columns:1fr;height:auto;}
-          .sw-top-row>*,.sw-bot-row>*{height:300px;}
-          .sw-center{height:340px;}
+          .sw-top-row>*,.sw-bot-row>*{height:auto; min-height:220px;}
+          .sw-center{height:auto; min-height:260px;}
+          .sw-center>*{min-height:260px;}
         }
       `}</style>
 
@@ -232,8 +235,7 @@ export default function StudioWorkSection() {
             {w3 && <WorkCard work={w3} />}
             {w4 && <WorkCard work={w4} />}
           </div>
-
-          <OurClients visible={visible} />
+ 
 
           <div
             className={`mt-16 flex items-center justify-between border-t border-neutral-200 pt-8 sw-fade d5 ${visible ? 'on' : ''}`}
