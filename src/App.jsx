@@ -11,14 +11,17 @@ import ContactPage from './pages/ContactPage';
 import TeamPage from './pages/TeamPage';
 import Gallery from './components/Gallery';
 import Footer from './components/Footer';
+import SmoothScroll from './animations/SmoothScroll';
+import ScrollProgress from './animations/ScrollProgress';
 
 function App() {
   useScrollReveal();
 
   return (
-    <>
+    <SmoothScroll>
       <PageLoader />
       <ScrollToTop />
+      <ScrollProgress />
       <CustomCursor />
       <Navbar />
       <Routes>
@@ -36,7 +39,7 @@ function App() {
           }
         />
       </Routes>
-    </>
+    </SmoothScroll>
   );
 }
 

@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SectionContainer from './SectionContainer';
- 
+import MagneticButton from './animations/MagneticButton';
 import { experiencesWithImages } from '../content/experienceImages';
 
-function WorkCard({ work, featured = false, style = {} }) {
+/** Single card — image on top, title + tags below, exactly like schachzudritt reference */
+function WorkCard({ work, delay = 0, visible = false }) {
   const navigate = useNavigate();
   const [hovered, setHovered] = useState(false);
 
@@ -15,116 +16,84 @@ function WorkCard({ work, featured = false, style = {} }) {
 
   return (
     <div
-      className="relative cursor-pointer overflow-hidden w-full h-full bg-neutral-100"
-      style={{ borderRadius: featured ? 20 : 14, ...style }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      onClick={openGallery}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => e.key === 'Enter' && openGallery()}
+      className="sw-fade"
+      style={{
+        transitionDelay: `${delay}ms`,
+        opacity: visible ? 1 : 0,
+        transform: visible ? 'translateY(0)' : 'translateY(28px)',
+        transition: 'opacity .85s ease-out, transform .85s ease-out',
+      }}
     >
+      {/* Image block */}
       <div
-        className="absolute inset-0 transition-transform duration-700 ease-out"
-        style={{ transform: hovered ? 'scale(1.05)' : 'scale(1)' }}
+        className="relative overflow-hidden cursor-pointer"
+        style={{ borderRadius: 12, height: 'clamp(220px,28vw,380px)', background: '#111' }}
+        onClick={openGallery}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => e.key === 'Enter' && openGallery()}
       >
+        {/* Image */}
         {work.coverImage ? (
           <img
             src={work.coverImage}
             alt={work.title}
-            className="w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{
+              transform: hovered ? 'scale(1.05)' : 'scale(1)',
+              transition: 'transform .7s ease',
+            }}
             loading="lazy"
             decoding="async"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center text-neutral-400 text-sm">
+          <div className="absolute inset-0 flex items-center justify-center" style={{ color: 'rgba(255,255,255,0.2)', fontSize: 13 }}>
             No image
           </div>
         )}
-      </div>
 
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{ background: 'linear-gradient(to top, rgba(0,0,0,.72) 0%, transparent 42%)' }}
-      />
-      <div
-        className="absolute inset-0 pointer-events-none transition-opacity duration-500"
-        style={{
-          background:
-            'linear-gradient(to top, rgba(0,0,0,.82) 0%, rgba(0,0,0,.15) 45%, transparent 70%)',
-          opacity: hovered ? 1 : 0,
-        }}
-      />
-
-      <div className="absolute top-5 left-5 z-10">
-        <span
-          className="uppercase tracking-[0.2em] px-3 py-1.5 rounded-full"
-          style={{
-            fontSize: 9,
-            fontFamily: "'DM Mono',monospace",
-            background: 'rgba(255,255,255,.12)',
-            backdropFilter: 'blur(10px)',
-            border: '1px solid rgba(255,255,255,.2)',
-            color: 'rgba(255,255,255,.92)',
-          }}
-        >
-          {work.category}
-        </span>
-      </div>
-      <div
-        className="absolute top-5 right-5 z-10 text-white opacity-25"
-        style={{ fontSize: 11, fontFamily: "'DM Mono',monospace" }}
-      >
-        0{work.id}
-      </div>
-
-      <div className="absolute bottom-0 left-0 right-0 z-10 p-5 flex items-end justify-between">
-        <div>
-          <div className="flex items-center gap-2 mb-1">
-            <span
-              className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-              style={{ background: work.accent }}
-            />
-            <h3
-              className="text-white font-semibold leading-tight"
-              style={{
-                fontFamily: "'Playfair Display',serif",
-                fontSize: featured
-                  ? 'clamp(17px,2.2vw,24px)'
-                  : 'clamp(13px,1.6vw,18px)',
-              }}
-            >
-              {work.title}
-            </h3>
-          </div>
-          <p
-            className="text-neutral-300 tracking-wider uppercase ml-3.5"
-            style={{ fontSize: 9, fontFamily: "'DM Mono',monospace" }}
-          >
-            {work.tags.join(' / ')}
-          </p>
-        </div>
+        {/* Dim overlay on hover */}
         <div
-          className="flex-shrink-0 ml-3 rounded-full border flex items-center justify-center transition-all duration-300"
+          className="absolute inset-0 pointer-events-none transition-opacity duration-500"
           style={{
-            width: 36,
-            height: 36,
-            background: hovered ? 'rgba(255,255,255,.15)' : 'transparent',
-            borderColor: hovered ? 'rgba(255,255,255,.5)' : 'rgba(255,255,255,.2)',
-            transform: hovered ? 'scale(1.12)' : 'scale(1)',
+            background: 'linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 55%)',
+            opacity: hovered ? 1 : 0.4,
+          }}
+        />
+
+        {/* Top-right arrow on hover */}
+        <div
+          className="absolute top-4 right-4 z-10 flex items-center justify-center rounded-full border border-white/30 transition-all duration-300"
+          style={{
+            width: 34, height: 34,
+            background: hovered ? 'rgba(255,255,255,0.12)' : 'transparent',
+            opacity: hovered ? 1 : 0,
+            transform: hovered ? 'scale(1)' : 'scale(0.8)',
           }}
         >
-          <span
-            className="text-white"
-            style={{
-              fontSize: 12,
-              display: 'block',
-              transform: hovered ? 'translate(1px,-1px)' : 'none',
-              transition: 'transform .3s',
-            }}
-          >
-            ↗
-          </span>
+          <span className="text-white text-xs">↗</span>
+        </div>
+      </div>
+
+      {/* Text below image */}
+      <div className="mt-3 px-0.5">
+        <h3
+          className="text-white font-semibold leading-snug mb-2"
+          style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(15px, 1.8vw, 20px)' }}
+        >
+          {work.title}
+        </h3>
+        <div className="flex flex-wrap gap-1.5">
+          {work.tags.map((tag) => (
+            <span
+              key={tag}
+              className="text-white/50 text-[10px] font-mono tracking-wider px-2.5 py-1 rounded-full border border-white/10 hover:border-white/25 hover:text-white/80 transition-colors cursor-default"
+            >
+              #{tag}
+            </span>
+          ))}
         </div>
       </div>
     </div>
@@ -136,14 +105,13 @@ export default function StudioWorkSection() {
   const [visible, setVisible] = useState(false);
   const ref = useRef(null);
 
-  const [w0, w1, w2, w3, w4] = experiencesWithImages;
+  // Only take the 4 available experiences
+  const works = experiencesWithImages.slice(0, 4);
 
   useEffect(() => {
     const obs = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) setVisible(true);
-      },
-      { threshold: 0.08 }
+      ([e]) => { if (e.isIntersecting) setVisible(true); },
+      { threshold: 0.06 }
     );
     if (ref.current) obs.observe(ref.current);
     return () => obs.disconnect();
@@ -152,27 +120,12 @@ export default function StudioWorkSection() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&display=swap');
-
-        .sw-fade { opacity:0; transform:translateY(28px); transition:opacity .85s ease-out,transform .85s ease-out; }
-        .sw-fade.on { opacity:1; transform:translateY(0); }
-        .d0{transition-delay:0ms} .d1{transition-delay:120ms} .d2{transition-delay:220ms}
-        .d3{transition-delay:320ms} .d4{transition-delay:420ms} .d5{transition-delay:520ms}
-
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Mono:wght@300;400;500&display=swap');
         .mq-inner{display:flex;gap:2.5rem;animation:mq 28s linear infinite;white-space:nowrap;}
         @keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-
-        .sw-top-row   { display:grid; grid-template-columns:1fr 1fr; gap:16px; height:clamp(280px,36vw,500px); }
-        .sw-center    { width:100%; height:clamp(320px,46vw,600px); margin-top:16px; }
-        .sw-bot-row   { display:grid; grid-template-columns:1fr 1fr; gap:16px; height:clamp(260px,34vw,460px); margin-top:16px; }
-
         @media(max-width:640px){
           .mq-inner{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0.75rem;animation:none;white-space:normal;}
           .mq-inner span{white-space:normal;}
-          .sw-top-row,.sw-bot-row{grid-template-columns:1fr;height:auto;}
-          .sw-top-row>*,.sw-bot-row>*{height:auto; min-height:220px;}
-          .sw-center{height:auto; min-height:260px;}
-          .sw-center>*{min-height:260px;}
         }
       `}</style>
 
@@ -180,84 +133,90 @@ export default function StudioWorkSection() {
         id="experiences"
         ref={ref}
         className="scroll-mt-24"
-        style={{ background: 'var(--bg-primary)', fontFamily: "'DM Mono',monospace" }}
+        style={{ background: '#08020f', fontFamily: "'DM Mono', monospace" }}
       >
         <SectionContainer>
-          <div id="about" className={`mb-14 scroll-mt-24 sw-fade d0 ${visible ? 'on' : ''}`}>
-            <div className="flex items-center gap-4 mb-6">
-              <div className="w-8 h-px bg-neutral-300" />
-              <span
-                className="text-neutral-500 uppercase tracking-[0.4em]"
-                style={{ fontSize: 10 }}
-              >
+          {/* Section label */}
+          <div
+            id="about"
+            className="mb-10 scroll-mt-24"
+            style={{
+              opacity: visible ? 1 : 0,
+              transform: visible ? 'translateY(0)' : 'translateY(20px)',
+              transition: 'opacity .7s ease, transform .7s ease',
+            }}
+          >
+            <div className="flex items-center gap-4 mb-2">
+              <div className="w-8 h-px bg-white/20" />
+              <span className="text-white/40 uppercase tracking-[0.4em]" style={{ fontSize: 10 }}>
                 Our Experiences
               </span>
             </div>
           </div>
 
+          {/* Scrolling tag strip */}
           <div
-            className={`overflow-hidden border-y border-neutral-200 py-3.5 mb-10 sw-fade d1 ${visible ? 'on' : ''}`}
+            className="overflow-hidden border-y py-3.5 mb-12"
+            style={{
+              borderColor: 'rgba(255,255,255,0.08)',
+              opacity: visible ? 1 : 0,
+              transition: 'opacity .7s ease .1s',
+            }}
           >
             <div className="mq-inner">
               {[...Array(2)].flatMap((_, gi) =>
-                [
-                  'Luxury Weddings',
-                  'Corporate Galas',
-                  'Brand Activations',
-                  'Music Festivals',
-                  'Stage Production',
-                  'VIP Experiences',
-                  'Destination Events',
-                  'Live Concerts',
-                ].map((s, i) => (
+                ['Corporate Events', 'Brand Activations', 'Music Festivals', 'Stage Production', 'VIP Experiences', 'Destination Events', 'Live Concerts', 'Fashion Shows'].map((s, i) => (
                   <span
                     key={`${gi}-${i}`}
-                    className="text-neutral-500 uppercase tracking-[0.28em] flex items-center gap-2.5"
+                    className="text-white/35 uppercase tracking-[0.28em] flex items-center gap-2.5"
                     style={{ fontSize: 9 }}
                   >
-                    {s} <span className="text-neutral-300">◆</span>
+                    {s} <span className="text-white/15">◆</span>
                   </span>
                 ))
               )}
             </div>
           </div>
 
-          <div className={`sw-top-row sw-fade d2 ${visible ? 'on' : ''}`}>
-            {w0 && <WorkCard work={w0} />}
-            {w1 && <WorkCard work={w1} />}
-          </div>
-
-          <div className={`sw-center sw-fade d3 ${visible ? 'on' : ''}`}>
-            {w2 && <WorkCard work={w2} featured />}
-          </div>
-
-          <div className={`sw-bot-row sw-fade d4 ${visible ? 'on' : ''}`}>
-            {w3 && <WorkCard work={w3} />}
-            {w4 && <WorkCard work={w4} />}
-          </div>
- 
-
+          {/* 2×2 Grid */}
           <div
-            className={`mt-16 flex items-center justify-between border-t border-neutral-200 pt-8 sw-fade d5 ${visible ? 'on' : ''}`}
+            className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-10"
           >
-            <p className="text-neutral-500 uppercase tracking-[0.3em]" style={{ fontSize: 10 }}>
+            {works.map((work, i) => (
+              <WorkCard key={work.slug} work={work} delay={i * 120} visible={visible} />
+            ))}
+          </div>
+
+          {/* Footer CTA */}
+          <div
+            className="mt-16 flex items-center justify-between pt-8"
+            style={{
+              borderTop: '1px solid rgba(255,255,255,0.08)',
+              opacity: visible ? 1 : 0,
+              transition: 'opacity .7s ease .55s',
+            }}
+          >
+            <p className="text-white/30 uppercase tracking-[0.3em]" style={{ fontSize: 10 }}>
               © Next Orbit — 2026
             </p>
-            <button
-              type="button"
-              onClick={() => navigate('/contact')}
-              className="group flex items-center gap-3 px-6 py-3 border border-neutral-200 rounded-full hover:border-neutral-400 transition-all duration-300"
-            >
-              <span
-                className="text-neutral-500 group-hover:text-neutral-900 uppercase tracking-[0.25em] transition-colors duration-300"
-                style={{ fontSize: 10 }}
+            <MagneticButton strength={0.3}>
+              <button
+                type="button"
+                onClick={() => navigate('/contact')}
+                className="group flex items-center gap-3 px-6 py-3 rounded-full border transition-all duration-300"
+                style={{ borderColor: 'rgba(255,255,255,0.15)' }}
+                onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(255,255,255,0.4)'}
+                onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)'}
               >
-                Start a Project
-              </span>
-              <span className="text-neutral-400 group-hover:text-neutral-900 transition-colors text-xs">
-                →
-              </span>
-            </button>
+                <span
+                  className="text-white/50 group-hover:text-white uppercase tracking-[0.25em] transition-colors duration-300"
+                  style={{ fontSize: 10 }}
+                >
+                  Start a Project
+                </span>
+                <span className="text-white/40 group-hover:text-white transition-colors text-xs">→</span>
+              </button>
+            </MagneticButton>
           </div>
         </SectionContainer>
       </section>

@@ -1,14 +1,12 @@
 import { useEffect, useRef } from 'react';
+import CursorParticles from './animations/CursorParticles';
 
 export default function CustomCursor() {
-  const cursorRef = useRef(null);
   const dotRef = useRef(null);
 
   useEffect(() => {
-    const cursor = cursorRef.current;
     const dot = dotRef.current;
-    let mouseX = 0, mouseY = 0;
-    let cursorX = 0, cursorY = 0;
+    let mouseX = -100, mouseY = -100;
 
     const move = (e) => {
       mouseX = e.clientX;
@@ -19,38 +17,24 @@ export default function CustomCursor() {
       }
     };
 
-    const animate = () => {
-      cursorX += (mouseX - cursorX) * 0.12;
-      cursorY += (mouseY - cursorY) * 0.12;
-      if (cursor) {
-        cursor.style.left = cursorX + 'px';
-        cursor.style.top = cursorY + 'px';
-      }
-      requestAnimationFrame(animate);
-    };
+    const addHover = () => dot?.classList.add('dot-hover');
+    const removeHover = () => dot?.classList.remove('dot-hover');
 
-    const addHover = () => cursor?.classList.add('hovering');
-    const removeHover = () => cursor?.classList.remove('hovering');
+    document.addEventListener('mousemove', move, { passive: true });
 
-    document.addEventListener('mousemove', move);
-    requestAnimationFrame(animate);
-
-    const interactives = document.querySelectorAll('a, button, [data-cursor-hover]');
-    interactives.forEach(el => {
-      el.addEventListener('mouseenter', addHover);
-      el.addEventListener('mouseleave', removeHover);
-    });
-
-    // Re-observe for dynamically added elements
-    const observer = new MutationObserver(() => {
-      const newInteractives = document.querySelectorAll('a, button, [data-cursor-hover]');
-      newInteractives.forEach(el => {
+    const observeElements = () => {
+      const interactives = document.querySelectorAll('a, button, [role="button"], input, textarea, select, [data-cursor-hover]');
+      interactives.forEach(el => {
         el.removeEventListener('mouseenter', addHover);
         el.removeEventListener('mouseleave', removeHover);
         el.addEventListener('mouseenter', addHover);
         el.addEventListener('mouseleave', removeHover);
       });
-    });
+    };
+
+    observeElements();
+
+    const observer = new MutationObserver(observeElements);
     observer.observe(document.body, { childList: true, subtree: true });
 
     return () => {
@@ -59,14 +43,13 @@ export default function CustomCursor() {
     };
   }, []);
 
-  // Hide on touch devices
   if (typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches) {
     return null;
   }
 
   return (
     <>
-      <div ref={cursorRef} className="custom-cursor hidden md:block" />
+      <CursorParticles />
       <div ref={dotRef} className="cursor-dot hidden md:block" />
     </>
   );

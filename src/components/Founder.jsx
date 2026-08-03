@@ -2,6 +2,24 @@ import { useState, useEffect, useRef } from 'react';
 import SectionContainer from './SectionContainer';
 import founderImg from '../assets/founder.jpg';
 import { founderContent as c } from '../content/siteContent';
+import useCountUp from '../hooks/useCountUp';
+
+function HighlightStat({ highlight }) {
+  const { ref, displayValue } = useCountUp({ target: highlight.value, duration: 2 });
+  return (
+    <div ref={ref}>
+      <p
+        className="text-2xl font-semibold text-gradient-orbital"
+        style={{ fontFamily: 'var(--font-heading)' }}
+      >
+        {displayValue}
+      </p>
+      <p className="text-neutral-500 text-xs uppercase tracking-widest mt-1">
+        {highlight.label}
+      </p>
+    </div>
+  );
+}
 
 export default function Founder() {
   const [visible, setVisible] = useState(false);
@@ -89,17 +107,7 @@ export default function Founder() {
 
             <div className="flex flex-wrap gap-8 mb-10">
               {c.highlights.map((h) => (
-                <div key={h.label}>
-                  <p
-                    className="text-2xl font-semibold text-gradient-orbital"
-                    style={{ fontFamily: 'var(--font-heading)' }}
-                  >
-                    {h.value}
-                  </p>
-                  <p className="text-neutral-500 text-xs uppercase tracking-widest mt-1">
-                    {h.label}
-                  </p>
-                </div>
+                <HighlightStat key={h.label} highlight={h} />
               ))}
             </div>
 

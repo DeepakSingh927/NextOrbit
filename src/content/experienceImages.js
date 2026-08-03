@@ -19,16 +19,7 @@ export const experiences = [
     tags: ['Live Music', 'Stage'],
     accent: '#C1593A',
   },
-  {
-    id: 3,
-    slug: 'eclipse-wedding',
-    folder: 'Branding',
-    title: 'BRANDING',
-    category: 'Luxury Wedding',
-    tags: ['Luxury', 'Destination', 'Wedding'],
-    accent: '#6a9e50',
-    featured: true,
-  },
+
   {
     id: 4,
     slug: 'nexus-summit',
@@ -49,7 +40,7 @@ export const experiences = [
   },
 ];
 
-const allImages = import.meta.glob('../assets/{Activation,Branding,Conference,Exhibition,Party}/*.{png,jpg,jpeg,webp,JPG,JPEG,PNG}', {
+const allImages = import.meta.glob('../assets/{Activation,Conference,Exhibition,Party}/*.{png,jpg,jpeg,webp,JPG,JPEG,PNG}', {
   eager: true,
   import: 'default',
 });
@@ -57,7 +48,7 @@ const allImages = import.meta.glob('../assets/{Activation,Branding,Conference,Ex
 function folderFromPath(path) {
   const parts = path.replace(/\\/g, '/').split('/');
   const idx = parts.findIndex((p) =>
-    ['Activation', 'Branding', 'Conference', 'Exhibition', 'Party'].includes(p)
+    ['Activation', 'Conference', 'Exhibition', 'Party'].includes(p)
   );
   return idx >= 0 ? parts[idx] : null;
 }

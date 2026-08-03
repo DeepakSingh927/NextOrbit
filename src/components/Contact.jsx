@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import SectionContainer from './SectionContainer';
 import { contactInfo } from '../content/siteContent';
 
-const eventTypes = ['Luxury Wedding', 'Corporate Event', 'Brand Activation', 'Music Festival', 'Fashion Show', 'VIP Experience', 'Destination Event', 'Other'];
+const eventTypes = ['Corporate Event', 'Brand Activation', 'Music Festival', 'Fashion Show', 'VIP Experience', 'Destination Event', 'Other'];
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: '', brand: '', budget: '', eventType: '', message: '' });
@@ -40,7 +40,7 @@ export default function Contact() {
         if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
         if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
         ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(0,180,255,${p.o})`; ctx.fill();
+        ctx.fillStyle = `rgba(139,92,246,${p.o})`; ctx.fill();
       });
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
@@ -48,7 +48,7 @@ export default function Contact() {
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < 100) {
             ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(0,180,255,${0.03 * (1 - dist / 100)})`; ctx.stroke();
+            ctx.strokeStyle = `rgba(139,92,246,${0.04 * (1 - dist / 100)})`; ctx.stroke();
           }
         }
       }
@@ -61,39 +61,56 @@ export default function Contact() {
   const handleChange = (e) => setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
 
   const inputBase = {
-    width: '100%', padding: '14px 18px', fontSize: 14, color: '#111',
-    background: '#ffffff', borderRadius: 12, outline: 'none',
+    width: '100%', padding: '14px 18px', fontSize: 14,
+    color: '#ffffff',
+    background: 'rgba(255,255,255,0.05)',
+    borderRadius: 12, outline: 'none',
     transition: 'all 0.3s', fontFamily: "'Inter', sans-serif", boxSizing: 'border-box',
   };
   const inputStyle = (name) => ({
     ...inputBase,
-    border: `1px solid ${focused === name ? 'rgba(0,180,255,0.45)' : 'rgba(0,0,0,0.1)'}`,
-    boxShadow: focused === name ? '0 0 20px rgba(0,180,255,0.08)' : 'none',
+    border: `1px solid ${focused === name ? 'rgba(139,92,246,0.55)' : 'rgba(255,255,255,0.1)'}`,
+    boxShadow: focused === name ? '0 0 20px rgba(139,92,246,0.12)' : 'none',
   });
 
   return (
-    <section id="contact" className="relative overflow-hidden scroll-mt-24" style={{ background: 'var(--bg-primary)' }}>
-      <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0.25 }} />
+    <section id="contact" className="relative overflow-hidden scroll-mt-24" style={{ background: '#08020f' }}>
+      <style>{`
+        #contact ::placeholder { color: rgba(255,255,255,0.3); }
+        #contact select option { background: #1a0a2e; color: #ffffff; }
+        .contact-label { font-size: 11px; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 8px; display: block; }
+      `}</style>
+
+      <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0.3 }} />
       <div style={{
         position: 'absolute', top: 0, left: 0, right: 0, height: 1,
-        background: 'linear-gradient(90deg, transparent, rgba(0,180,255,0.15), transparent)',
+        background: 'linear-gradient(90deg, transparent, rgba(139,92,246,0.2), transparent)',
       }} />
 
       <SectionContainer style={{ position: 'relative', zIndex: 10 }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 420px), 1fr))', gap: 60, alignItems: 'start' }}>
-          {/* Left */}
+
+          {/* Left — contact info */}
           <div className="reveal">
-            <div className="section-tag" style={{ marginBottom: 20 }}><span className="dot" /> Get In Touch</div>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 14px', borderRadius: 99, border: '1px solid rgba(139,92,246,0.25)', background: 'rgba(139,92,246,0.08)', marginBottom: 20 }}>
+              <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#8B5CF6', display: 'inline-block' }} />
+              <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.3em' }}>Get In Touch</span>
+            </div>
+
             <h2 style={{
               fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(2rem, 4.5vw, 3.2rem)',
-              fontWeight: 700, lineHeight: 1.15, color: '#111', marginBottom: 24,
+              fontWeight: 700, lineHeight: 1.15, color: '#ffffff', marginBottom: 16,
             }}>
-              Launch your next <span className="text-gradient-orbital">orbit</span>
+              Launch your next{' '}
+              <span style={{ background: 'linear-gradient(135deg,#8B5CF6,#00B4FF)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+                orbit
+              </span>
             </h2>
-            <p style={{ fontSize: '1.05rem', lineHeight: 1.7, color: 'rgba(17,17,17,0.55)', maxWidth: 450, marginBottom: 40 }}>
+            <p style={{ fontSize: '1rem', lineHeight: 1.75, color: 'rgba(255,255,255,0.5)', maxWidth: 420, marginBottom: 40 }}>
               Ready to create something extraordinary? Tell us about your vision and let's build an experience that transcends the ordinary.
             </p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
               {[
                 { label: 'Email', value: contactInfo.email, href: contactInfo.emailHref, icon: '✉️' },
                 { label: 'Phone', value: contactInfo.phoneDisplay, href: contactInfo.phoneHref, icon: '📱' },
@@ -103,20 +120,21 @@ export default function Contact() {
                 <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
                   <div style={{
                     width: 44, height: 44, borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    fontSize: 18, background: 'rgba(0,180,255,0.06)', border: '1px solid rgba(0,180,255,0.1)', flexShrink: 0,
+                    fontSize: 18, background: 'rgba(139,92,246,0.08)', border: '1px solid rgba(139,92,246,0.15)', flexShrink: 0,
                   }}>{icon}</div>
                   <div>
-                    <div style={{ fontSize: 11, color: 'rgba(17,17,17,0.45)', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 2 }}>{label}</div>
+                    <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.35)', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 3 }}>{label}</div>
                     {Array.isArray(value) ? (
-                      <div style={{ fontSize: 14, color: 'rgba(17,17,17,0.75)', lineHeight: 1.6 }}>
-                        {value.map((line, i) => (
-                          <div key={i}>{line}</div>
-                        ))}
+                      <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.7)', lineHeight: 1.6 }}>
+                        {value.map((line, i) => <div key={i}>{line}</div>)}
                       </div>
                     ) : href ? (
-                      <a href={href} target="_blank" rel="noreferrer" style={{ fontSize: 14, color: 'rgba(17,17,17,0.75)', textDecoration: 'none' }}>{value}</a>
+                      <a href={href} target="_blank" rel="noreferrer" style={{ fontSize: 14, color: 'rgba(255,255,255,0.7)', textDecoration: 'none' }}
+                        onMouseEnter={e => e.currentTarget.style.color = '#ffffff'}
+                        onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.7)'}
+                      >{value}</a>
                     ) : (
-                      <div style={{ fontSize: 14, color: 'rgba(17,17,17,0.75)' }}>{value}</div>
+                      <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.7)' }}>{value}</div>
                     )}
                   </div>
                 </div>
@@ -124,69 +142,71 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* Right - Form */}
+          {/* Right — Form */}
           <div className="reveal-right">
             <div style={{
               borderRadius: 20, padding: '36px 32px',
-              background: '#ffffff',
-              border: '1px solid rgba(0,0,0,0.08)',
-              boxShadow: '0 8px 32px rgba(0,0,0,0.06)',
+              background: 'rgba(255,255,255,0.04)',
+              border: '1px solid rgba(255,255,255,0.08)',
+              backdropFilter: 'blur(12px)',
             }}>
+              {/* Map */}
               <div style={{ marginBottom: 28 }}>
-                <div style={{ fontSize: 12, color: 'rgba(17,17,17,0.5)', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 10 }}>Office Location</div>
-                <div style={{ borderRadius: 18, overflow: 'hidden', border: '1px solid rgba(0,0,0,0.08)' }}>
+                <div className="contact-label">Office Location</div>
+                <div style={{ borderRadius: 14, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.08)' }}>
                   <iframe
                     title="Next Orbit Location"
                     src={contactInfo.mapEmbedUrl}
                     loading="lazy"
-                    style={{ width: '100%', height: 220, border: 0, display: 'block' }}
+                    style={{ width: '100%', height: 200, border: 0, display: 'block' }}
                   />
-                  <div style={{ padding: 16, background: '#f9fafb', color: '#111', lineHeight: 1.6, fontSize: 14 }}>
-                    {contactInfo.addressLines.map((line, i) => (
-                      <div key={i}>{line}</div>
-                    ))}
-                    <a href={contactInfo.mapLink} target="_blank" rel="noreferrer" style={{ display: 'inline-block', marginTop: 10, color: '#0066ff', textDecoration: 'underline' }}>
-                      Open in Google Maps
+                  <div style={{ padding: '12px 16px', background: 'rgba(255,255,255,0.04)', color: 'rgba(255,255,255,0.6)', lineHeight: 1.6, fontSize: 13 }}>
+                    {contactInfo.addressLines.map((line, i) => <div key={i}>{line}</div>)}
+                    <a href={contactInfo.mapLink} target="_blank" rel="noreferrer"
+                      style={{ display: 'inline-block', marginTop: 8, color: '#8B5CF6', textDecoration: 'none', fontSize: 12 }}>
+                      Open in Google Maps →
                     </a>
                   </div>
                 </div>
               </div>
-              <form onSubmit={(e) => e.preventDefault()} style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+
+              {/* Form */}
+              <form onSubmit={(e) => e.preventDefault()} style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
                   <div>
-                    <label style={{ display: 'block', fontSize: 11, color: 'rgba(17,17,17,0.45)', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 8 }}>Name</label>
+                    <label className="contact-label">Name</label>
                     <input type="text" name="name" value={formData.name} onChange={handleChange}
                       onFocus={() => setFocused('name')} onBlur={() => setFocused('')}
                       style={inputStyle('name')} placeholder="Your name" />
                   </div>
                   <div>
-                    <label style={{ display: 'block', fontSize: 11, color: 'rgba(17,17,17,0.45)', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 8 }}>Brand</label>
+                    <label className="contact-label">Brand</label>
                     <input type="text" name="brand" value={formData.brand} onChange={handleChange}
                       onFocus={() => setFocused('brand')} onBlur={() => setFocused('')}
                       style={inputStyle('brand')} placeholder="Your brand" />
                   </div>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
                   <div>
-                    <label style={{ display: 'block', fontSize: 11, color: 'rgba(17,17,17,0.45)', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 8 }}>Budget</label>
+                    <label className="contact-label">Budget</label>
                     <input type="text" name="budget" value={formData.budget} onChange={handleChange}
                       onFocus={() => setFocused('budget')} onBlur={() => setFocused('')}
                       style={inputStyle('budget')} placeholder="Estimated budget" />
                   </div>
                   <div>
-                    <label style={{ display: 'block', fontSize: 11, color: 'rgba(17,17,17,0.45)', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 8 }}>Event Type</label>
+                    <label className="contact-label">Event Type</label>
                     <select name="eventType" value={formData.eventType} onChange={handleChange}
                       onFocus={() => setFocused('eventType')} onBlur={() => setFocused('')}
                       style={{ ...inputStyle('eventType'), appearance: 'none', cursor: 'pointer' }}>
-                      <option value="" style={{ background: '#fff' }}>Select type</option>
-                      {eventTypes.map(t => <option key={t} value={t} style={{ background: '#fff' }}>{t}</option>)}
+                      <option value="">Select type</option>
+                      {eventTypes.map(t => <option key={t} value={t}>{t}</option>)}
                     </select>
                   </div>
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', fontSize: 11, color: 'rgba(17,17,17,0.45)', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 8 }}>Message</label>
+                  <label className="contact-label">Message</label>
                   <textarea name="message" rows={4} value={formData.message} onChange={handleChange}
                     onFocus={() => setFocused('message')} onBlur={() => setFocused('')}
                     style={{ ...inputStyle('message'), resize: 'none' }} placeholder="Tell us about your vision..." />

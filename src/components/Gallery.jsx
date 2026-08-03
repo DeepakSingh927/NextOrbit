@@ -8,7 +8,7 @@ function PhotoCard({ src, alt }) {
 
   return (
     <div
-      className="relative overflow-hidden rounded-xl bg-neutral-100 cursor-pointer min-w-0 min-h-[220px] sm:min-h-[260px]"
+      className="relative overflow-hidden rounded-xl bg-neutral-900 cursor-pointer min-w-0 min-h-[220px] sm:min-h-[260px]"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -22,7 +22,7 @@ function PhotoCard({ src, alt }) {
         decoding="async"
       />
       <div
-        className={`absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent transition-opacity duration-300 ${
+        className={`absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent transition-opacity duration-300 ${
           hovered ? 'opacity-100' : 'opacity-0'
         }`}
       />
@@ -36,7 +36,7 @@ export default function PhotoGallery() {
   const images = getFolderImages(experience.folder);
 
   return (
-    <div className="min-h-screen bg-white font-sans pt-8 pb-16">
+    <div className="min-h-screen font-sans pt-24 pb-16" style={{ background: '#08020f', color: '#ffffff' }}>
       <SectionContainer>
         <style>{`
           @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');
@@ -46,44 +46,16 @@ export default function PhotoGallery() {
         <Link
           to="/"
           state={{ scrollTo: 'experiences' }}
-          className="inline-flex items-center gap-2 text-neutral-500 hover:text-neutral-900 text-sm mb-8 transition-colors"
+          className="inline-flex items-center gap-2 text-sm mb-8 transition-colors"
+          style={{ color: 'rgba(255,255,255,0.45)' }}
+          onMouseEnter={e => e.currentTarget.style.color = '#ffffff'}
+          onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.45)'}
         >
           ← Back to Experiences
         </Link>
 
-        <header className="mb-12 max-w-3xl">
-          <p
-            className="text-neutral-400 uppercase tracking-[0.25em] mb-3"
-            style={{ fontSize: 10, fontFamily: "'DM Mono',monospace" }}
-          >
-            {experience.category}
-          </p>
-          <h1 className="font-display text-4xl sm:text-5xl font-normal leading-tight text-neutral-900 mb-4">
-            {experience.title}
-          </h1>
-          <p className="text-sm text-neutral-500 tracking-wider uppercase mb-6">
-            {experience.tags.join(' / ')}
-          </p>
-          <div className="flex flex-wrap gap-8">
-            <div>
-              <span className="text-[10px] tracking-[0.15em] uppercase text-neutral-400 block mb-1">
-                Collection
-              </span>
-              <span className="text-sm text-neutral-700 font-medium">{experience.folder}</span>
-            </div>
-            <div>
-              <span className="text-[10px] tracking-[0.15em] uppercase text-neutral-400 block mb-1">
-                Photos
-              </span>
-              <span className="text-sm text-neutral-700 font-medium">{images.length}</span>
-            </div>
-          </div>
-        </header>
-
-        <hr className="border-neutral-200 mb-10" />
-
         {images.length === 0 ? (
-          <p className="text-neutral-500">No photos in this collection yet.</p>
+          <p style={{ color: 'rgba(255,255,255,0.4)' }}>No photos in this collection yet.</p>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 auto-rows-[minmax(220px,auto)]">
             {images.map((src, i) => (
@@ -97,8 +69,11 @@ export default function PhotoGallery() {
         )}
 
         {experiences.length > 1 && (
-          <div className="mt-14 pt-8 border-t border-neutral-200">
-            <p className="text-[10px] uppercase tracking-[0.2em] text-neutral-400 mb-4">
+          <div className="mt-14 pt-8" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+            <p
+              className="text-[10px] uppercase tracking-[0.2em] mb-4"
+              style={{ color: 'rgba(255,255,255,0.3)' }}
+            >
               More Experiences
             </p>
             <div className="flex flex-wrap gap-2">
@@ -109,7 +84,19 @@ export default function PhotoGallery() {
                     key={e.slug}
                     to={`/gallery/${e.slug}`}
                     onClick={() => window.scrollTo(0, 0)}
-                    className="text-xs px-4 py-2 rounded-full border border-neutral-200 text-neutral-600 hover:border-neutral-400 hover:text-neutral-900 transition-colors"
+                    className="text-xs px-4 py-2 rounded-full transition-colors"
+                    style={{
+                      border: '1px solid rgba(255,255,255,0.12)',
+                      color: 'rgba(255,255,255,0.5)',
+                    }}
+                    onMouseEnter={e => {
+                      e.currentTarget.style.borderColor = 'rgba(255,255,255,0.4)';
+                      e.currentTarget.style.color = '#ffffff';
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)';
+                      e.currentTarget.style.color = 'rgba(255,255,255,0.5)';
+                    }}
                   >
                     {e.title}
                   </Link>

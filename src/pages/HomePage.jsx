@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import HeroSection from '../components/hero';
+import ScrollStatementSection from '../components/ScrollStatementSection';
 import About from '../components/About';
 import Footer from '../components/Footer';
 import OurClients from '../components/OurClients';
@@ -20,8 +21,9 @@ export default function HomePage() {
   }, [location.pathname, location.state?.scrollTo]);
 
   return (
-    <main>
+    <main className="bg-[#08020f] text-white">
       <HeroSection />
+      <ScrollStatementSection />
       <OurClients visible />
       <About />
       <Footer />

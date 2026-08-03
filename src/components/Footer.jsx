@@ -60,10 +60,10 @@ function SocialLink({ social }) {
         height: 42,
         borderRadius: "50%",
         border: hovered
-          ? "0.5px solid rgba(17,17,17,0.35)"
-          : "0.5px solid rgba(17,17,17,0.12)",
-        color: hovered ? "#111111" : "rgba(17,17,17,0.55)",
-        background: hovered ? "rgba(0,0,0,0.04)" : "transparent",
+          ? "0.5px solid rgba(255,255,255,0.5)"
+          : "0.5px solid rgba(255,255,255,0.15)",
+        color: hovered ? "#ffffff" : "rgba(255,255,255,0.5)",
+        background: hovered ? "rgba(255,255,255,0.08)" : "transparent",
         transition: "all 0.25s ease",
         textDecoration: "none",
       }}
@@ -77,8 +77,8 @@ export default function Footer() {
   return (
     <footer
       style={{
-        background: "var(--bg-primary)",
-        borderTop: "0.5px solid rgba(0,0,0,0.08)",
+        background: "#08020f",
+        borderTop: "0.5px solid rgba(255,255,255,0.08)",
         fontFamily: "'DM Sans', sans-serif",
         position: "relative",
         overflow: "hidden",
@@ -93,45 +93,34 @@ export default function Footer() {
         }
 
         .footer-shimmer {
-          background: linear-gradient(90deg, rgba(236, 71, 0, 0.6) 0%,rgb(218, 244, 21) 40%,rgb(44, 17, 167) 55%,rgb(17, 36, 240) 70%, rgba(14, 192, 252, 0.6) 100%);
+          background: linear-gradient(90deg, #00B4FF 0%, #8B5CF6 40%, #00B4FF 70%, #00B4FF 100%);
           background-size: 200% auto;
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
-          animation: shimmer 5s linear infinite;
+          animation: shimmer 4s linear infinite;
         }
 
         .footer-link {
-          color: rgba(17,17,17,0.55);
+          color: rgba(255,255,255,0.4);
           font-size: 13px;
           text-decoration: none;
           transition: color 0.2s ease;
           letter-spacing: 0.01em;
         }
-        .footer-link:hover { color: #111111; }
+        .footer-link:hover { color: #ffffff; }
       `}</style>
 
-      {/* Subtle purple glow — top center */}
+      {/* Ambient glow top */}
       <div
         style={{
           position: "absolute",
-          top: 0,
+          top: "-60px",
           left: "50%",
           transform: "translateX(-50%)",
-          width: 480,
-          height: 1,
-          background: "linear-gradient(90deg, transparent, rgba(0,0,0,0.08), transparent)",
-        }}
-      />
-      <div
-        style={{
-          position: "absolute",
-          top: "-40px",
-          left: "50%",
-          transform: "translateX(-50%)",
-          width: 300,
-          height: 100,
+          width: 400,
+          height: 120,
           borderRadius: "50%",
-          background: "radial-gradient(ellipse, rgba(139,92,246,0.06) 0%, transparent 70%)",
+          background: "radial-gradient(ellipse, rgba(139,92,246,0.1) 0%, transparent 70%)",
           pointerEvents: "none",
         }}
       />
@@ -163,7 +152,7 @@ export default function Footer() {
                 fontSize: 22,
                 fontWeight: 500,
                 letterSpacing: "0.12em",
-                color: "#111111",
+                color: "#ffffff",
                 marginBottom: 10,
               }}
             >
@@ -172,15 +161,16 @@ export default function Footer() {
             <p
               style={{
                 fontSize: 13,
-                color: "rgba(17, 17, 17, 0.6)",
+                color: "rgba(255,255,255,0.45)",
                 margin: 0,
                 fontWeight: 300,
+                lineHeight: 1.7,
               }}
             >
               Mumbai's premier event production studio. We turn visions into experiences that linger long after the lights go down.
             </p>
 
-            {/* Purple accent dot-row */}
+            {/* Accent dot-row */}
             <div style={{ display: "flex", gap: 5, marginTop: 18 }}>
               {[1, 2, 3].map(i => (
                 <div
@@ -190,9 +180,8 @@ export default function Footer() {
                     height: 5,
                     borderRadius: 9999,
                     background: i === 1
-                      ? "rgba(17,17,17,0.85)"
-                      : "rgba(17,17,17,0.2)",
-                    transition: "width 0.3s",
+                      ? "rgba(255,255,255,0.7)"
+                      : "rgba(255,255,255,0.15)",
                   }}
                 />
               ))}
@@ -206,7 +195,7 @@ export default function Footer() {
                 fontSize: 10,
                 letterSpacing: "0.18em",
                 textTransform: "uppercase",
-                color: "rgba(17,17,17,0.45)",
+                color: "rgba(255,255,255,0.3)",
                 margin: "0 0 14px",
               }}
             >
@@ -225,12 +214,13 @@ export default function Footer() {
                 gap: 7,
                 marginTop: 18,
                 fontSize: 12,
-                color: "rgba(17,17,17,0.55)",
+                color: "rgba(255,255,255,0.4)",
                 letterSpacing: "0.02em",
                 transition: "color 0.2s",
+                textDecoration: "none",
               }}
-              onMouseEnter={e => e.currentTarget.style.color = "#111111"}
-              onMouseLeave={e => e.currentTarget.style.color = "rgba(17,17,17,0.55)"}
+              onMouseEnter={e => e.currentTarget.style.color = "#ffffff"}
+              onMouseLeave={e => e.currentTarget.style.color = "rgba(255,255,255,0.4)"}
             >
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="2" y="4" width="20" height="16" rx="2" />
@@ -245,7 +235,7 @@ export default function Footer() {
         <div
           style={{
             height: "0.5px",
-            background: "linear-gradient(90deg, transparent, rgba(0,0,0,0.08) 30%, rgba(0,0,0,0.12) 50%, rgba(0,0,0,0.08) 70%, transparent)",
+            background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.1) 30%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.1) 70%, transparent)",
             marginBottom: 28,
           }}
         />
@@ -260,7 +250,7 @@ export default function Footer() {
             gap: 16,
           }}
         >
-          <p style={{ fontSize: 12, color: "rgba(17,17,17,0.45)", margin: 0, letterSpacing: "0.02em" }}>
+          <p style={{ fontSize: 12, color: "rgba(255,255,255,0.3)", margin: 0, letterSpacing: "0.02em" }}>
             © {new Date().getFullYear()} Next Orbit Events Pvt. Ltd. — Mumbai, India
           </p>
 
