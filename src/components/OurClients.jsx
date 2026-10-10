@@ -40,7 +40,7 @@ function LogoChip({ logo }) {
           alt={logo.name}
           loading="lazy"
           decoding="async"
-          className="max-h-10 sm:max-h-12 w-auto object-contain brightness-0 opacity-90 hover:opacity-100 hover:scale-105 transition-all duration-300"
+          className="max-h-10 sm:max-h-12 w-auto object-contain opacity-95 hover:opacity-100 hover:scale-105 transition-all duration-300"
         />
       </div>
     </div>

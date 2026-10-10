@@ -61,15 +61,15 @@ export default function Navbar() {
   };
 
   const linkClass =
-    'relative text-white/80 hover:text-white text-xs sm:text-sm font-medium px-4 py-2 rounded-full transition-all duration-300 hover:bg-white/10 tracking-wider uppercase';
+    'relative text-white/80 hover:text-white text-xs sm:text-sm font-medium px-3.5 py-1.5 rounded-full transition-all duration-300 hover:bg-white/10 tracking-wider uppercase';
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 w-full transition-all duration-500">
       <nav
         className={`w-full transition-all duration-500 border-b ${
           scrolled
-            ? 'bg-black/20 backdrop-blur-sm border-white/20 py-3'
-            : 'bg-transparent backdrop-blur-[2px] border-white/10 py-4'
+            ? 'bg-black/40 backdrop-blur-md border-white/15 py-1.5'
+            : 'bg-transparent border-white/10 py-2'
         }`}
       >
         <SectionContainer padding="none" className="flex items-center justify-between gap-4">
@@ -88,12 +88,18 @@ export default function Navbar() {
           </div>
 
           <MagneticButton strength={0.25}>
-            <Link to="/" onClick={goHome} className="shrink-0 flex items-center justify-center px-3 py-1 group">
+            <Link
+              to="/"
+              onClick={goHome}
+              className="shrink-0 flex items-center justify-center px-3 py-0.5 group"
+              style={{ mixBlendMode: 'difference' }}
+            >
               <img
                 src={logo}
                 alt="Next Orbit"
-                className={`w-auto object-contain transition-all duration-500 ${
-                  scrolled ? 'h-8 sm:h-9' : 'h-9 sm:h-10'
+                style={{ mixBlendMode: 'difference' }}
+                className={`w-auto object-contain transition-all duration-500 brightness-0 invert ${
+                  scrolled ? 'h-6 sm:h-7' : 'h-7 sm:h-8'
                 } group-hover:scale-105`}
               />
             </Link>

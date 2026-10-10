@@ -24,26 +24,28 @@ function BrandLogo({ brand }) {
     <div style={{
       flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center',
       padding: '20px 40px', margin: '0 12px', borderRadius: 12,
-      background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.04)',
+      background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)',
       minWidth: 180, transition: 'all 0.4s ease', cursor: 'default',
     }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.background = 'rgba(0,180,255,0.04)';
-        e.currentTarget.style.borderColor = 'rgba(0,180,255,0.15)';
-        e.currentTarget.querySelector('.brand-name').style.color = 'rgba(255,255,255,0.8)';
+        e.currentTarget.style.background = 'linear-gradient(135deg, rgba(78,240,196,0.1), rgba(123,97,255,0.15))';
+        e.currentTarget.style.borderColor = 'rgba(123,97,255,0.4)';
+        e.currentTarget.style.transform = 'translateY(-2px)';
+        e.currentTarget.querySelector('.brand-name').style.color = '#ffffff';
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.background = 'rgba(255,255,255,0.02)';
-        e.currentTarget.style.borderColor = 'rgba(255,255,255,0.04)';
-        e.currentTarget.querySelector('.brand-name').style.color = 'rgba(255,255,255,0.2)';
+        e.currentTarget.style.background = 'rgba(255,255,255,0.05)';
+        e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
+        e.currentTarget.style.transform = 'translateY(0)';
+        e.currentTarget.querySelector('.brand-name').style.color = 'rgba(255,255,255,0.85)';
       }}
     >
       <div style={{ textAlign: 'center' }}>
         <div className="brand-name" style={{
           fontFamily: "'Outfit', sans-serif", fontSize: 17, fontWeight: 600,
-          letterSpacing: '0.05em', color: 'rgba(255,255,255,0.2)', transition: 'color 0.3s',
+          letterSpacing: '0.05em', color: 'rgba(255,255,255,0.85)', transition: 'color 0.3s',
         }}>{brand.name}</div>
-        <div style={{ fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.1)', marginTop: 4 }}>
+        <div style={{ fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#4ef0c4', marginTop: 4, fontWeight: 600 }}>
           {brand.category}
         </div>
       </div>

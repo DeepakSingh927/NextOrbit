@@ -43,9 +43,9 @@ export default function ScrollStatementSection() {
                   as="div"
                   mutedColor="#2e2e2e"
                   fillColor="#FFFFFF"
-                  start={`top ${85 - i * 5}%`}
-                  end={`bottom ${50 - i * 5}%`}
-                  scrub={0.5}
+                  start={`top ${90 - i * 4}%`}
+                  end={`top ${52 - i * 4}%`}
+                  scrub={0.3}
                   stagger={0.04}
                   className="font-bold tracking-tight leading-[1.1] whitespace-nowrap"
                   style={{

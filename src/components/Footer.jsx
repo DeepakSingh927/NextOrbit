@@ -3,7 +3,7 @@ import { useState } from "react";
 const socials = [
   {
     name: "Instagram",
-    href: "#",
+    href: "https://www.instagram.com/nextorbit_india?psln=b3p4eDAyN254c3E1",
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <rect x="2" y="2" width="20" height="20" rx="5" />
@@ -14,7 +14,7 @@ const socials = [
   },
   {
     name: "LinkedIn",
-    href: "#",
+    href: "https://www.linkedin.com/company/next-orbit-events/",
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
@@ -49,6 +49,8 @@ function SocialLink({ social }) {
   return (
     <a
       href={social.href}
+      target={social.href !== '#' ? '_blank' : undefined}
+      rel={social.href !== '#' ? 'noopener noreferrer' : undefined}
       aria-label={social.name}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
